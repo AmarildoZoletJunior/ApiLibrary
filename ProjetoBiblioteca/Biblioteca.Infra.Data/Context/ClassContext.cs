@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Domain.Entities;
 using Biblioteca.Infra.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,7 @@ namespace Biblioteca.Infra.Data.Context
         {
         }
         public DbSet<Author> Autores { get; set; }
-
-
-
+        public DbSet<Category> Categories {get;set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuthorMapping());

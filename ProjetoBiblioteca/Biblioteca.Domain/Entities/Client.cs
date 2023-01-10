@@ -13,5 +13,8 @@ namespace Biblioteca.Domain.Entities
         public string Nome { get; set; } = null!;
         public string Email { get; set; }
         public Decimal SaldoDevedor { get; set; }
+
+        //Relacionamento com Aluguel
+        //Relacionamento com Historico
     }
 }

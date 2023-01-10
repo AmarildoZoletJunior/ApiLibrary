@@ -1,0 +1,17 @@
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\bin\Debug\net6.0\Biblioteca.Infra.Data.deps.json
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\bin\Debug\net6.0\Biblioteca.Infra.Data.runtimeconfig.json
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\bin\Debug\net6.0\Biblioteca.Infra.Data.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\bin\Debug\net6.0\Biblioteca.Infra.Data.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\bin\Debug\net6.0\Biblioteca.Domain.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\bin\Debug\net6.0\Biblioteca.Domain.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.csproj.AssemblyReference.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.AssemblyInfoInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.AssemblyInfo.cs
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.csproj.CoreCompileInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.csproj.CopyComplete
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\refint\Biblioteca.Infra.Data.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\Biblioteca.Infra.Data.genruntimeconfig.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Infra.Data\obj\Debug\net6.0\ref\Biblioteca.Infra.Data.dll
