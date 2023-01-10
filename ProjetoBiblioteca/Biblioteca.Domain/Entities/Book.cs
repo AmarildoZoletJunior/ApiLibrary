@@ -14,7 +14,9 @@ namespace Biblioteca.Domain.Entities
         public DateTime DataLancamento { get; set; }
         public int QuantidadePagina { get; set; }
         public Author Autor { get; set; }
+        public int AutorId { get; set; }
         public Category Categoria { get; set; }
+        public int  CategoriaId { get; set; }
 
         //Relacionamento com estoque
     }

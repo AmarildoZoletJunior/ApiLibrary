@@ -1,0 +1,15 @@
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.csproj.AssemblyReference.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.AssemblyInfoInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.AssemblyInfo.cs
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.csproj.CoreCompileInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\bin\Debug\net6.0\Biblioteca.Services.deps.json
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\bin\Debug\net6.0\Biblioteca.Services.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\bin\Debug\net6.0\Biblioteca.Services.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\bin\Debug\net6.0\Biblioteca.Domain.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\bin\Debug\net6.0\Biblioteca.Domain.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.csproj.CopyComplete
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\refint\Biblioteca.Services.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\Biblioteca.Services.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Services\obj\Debug\net6.0\ref\Biblioteca.Services.dll

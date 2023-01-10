@@ -9,9 +9,9 @@ namespace Biblioteca.Domain.Entities
 {
     public class Author : BaseEntity
     {
-        public string Nome { get; set; } = null!;
+        public string Nome { get; set; }
 
-        public ICollection<Book> Livros { get; set; }
+        public ICollection<Book>? Livros { get; set; }
 
     }
 }

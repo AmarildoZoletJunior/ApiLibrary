@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BvL2uChx76EhNwzwzU0ijWwutnp/H9aC6hvUEgTbiZ8rQ90Svzr90l/S2d8N1d0Ea65t4uhyuJSRik/e/EUnvw==",
+  "dgSpecHash": "RUgBM1gOlRT5hg0jx/DTGfCKWHWeFSUjkFT6DZXtBYsVuBW9eIDtWUe7int+DRyI2SBFUsX9aPuoxVKh6m2hsg==",
   "success": true,
   "projectFilePath": "C:\\Users\\amarildojunior_frwk\\Desktop\\Workspace\\ProjetoBiblioteca\\Biblioteca.Domain\\Biblioteca.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

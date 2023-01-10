@@ -1,0 +1,7 @@
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.csproj.AssemblyReference.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.AssemblyInfoInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.AssemblyInfo.cs
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.csproj.CoreCompileInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Application\obj\Debug\net6.0\Biblioteca.Application.MvcApplicationPartsAssemblyInfo.cs

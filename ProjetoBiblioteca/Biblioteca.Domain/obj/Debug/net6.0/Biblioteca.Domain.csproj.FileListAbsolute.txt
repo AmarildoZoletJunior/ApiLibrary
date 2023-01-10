@@ -1,0 +1,12 @@
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.csproj.AssemblyReference.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.AssemblyInfoInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.AssemblyInfo.cs
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.csproj.CoreCompileInputs.cache
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\bin\Debug\net6.0\Biblioteca.Domain.deps.json
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\bin\Debug\net6.0\Biblioteca.Domain.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\bin\Debug\net6.0\Biblioteca.Domain.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\refint\Biblioteca.Domain.dll
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\Biblioteca.Domain.pdb
+C:\Users\amarildojunior_frwk\Desktop\Workspace\ProjetoBiblioteca\Biblioteca.Domain\obj\Debug\net6.0\ref\Biblioteca.Domain.dll

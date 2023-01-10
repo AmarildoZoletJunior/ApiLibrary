@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "AG7tZtQQF5iEluQL32uEfDev4FHYosnqpbizAbwQkYzxALPADqHyo48jTpXM932NkpmjJlM5dQLbwEP+KSmCDA==",
+  "dgSpecHash": "bCa9dR/u7pB+wxzy6O0qyRTs0IE/uyGFAuSQRuBwtnUwDzDluh6S1EsklyA85ecNrLTs0fJhnDNYeOW0653WGg==",
   "success": true,
   "projectFilePath": "C:\\Users\\amarildojunior_frwk\\Desktop\\Workspace\\ProjetoBiblioteca\\Biblioteca.Services\\Biblioteca.Services.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\extensions.fluentvalidation.br\\1.0.2\\extensions.fluentvalidation.br.1.0.2.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\fluentvalidation\\11.4.0\\fluentvalidation.11.4.0.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

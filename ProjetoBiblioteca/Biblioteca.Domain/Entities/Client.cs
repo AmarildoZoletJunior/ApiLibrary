@@ -10,7 +10,8 @@ namespace Biblioteca.Domain.Entities
     public class Client : BaseEntity
     {
         public string CPF { get; set; } = null!;
-        public string NomeCliente { get; set; } = null!;
-
+        public string Nome { get; set; } = null!;
+        public string Email { get; set; }
+        public Decimal SaldoDevedor { get; set; }
     }
 }
