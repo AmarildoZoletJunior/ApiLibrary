@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteca.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,8 @@ namespace Biblioteca.Domain.DTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+
+        public ICollection<BookDTO>? Livros { get; set; }
+
     }
 }

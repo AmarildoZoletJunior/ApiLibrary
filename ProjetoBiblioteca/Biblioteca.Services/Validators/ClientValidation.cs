@@ -21,8 +21,8 @@ namespace Biblioteca.Services.Validators
 
             RuleFor(x => x.CPF)
                 .NotEmpty().WithName("CPF").WithMessage("O campo CPF não pode estar vazio.")
-                .NotNull().WithName("CPF").WithMessage("O campo CPF não pode ser nulo.")
-                .IsValidCPF().WithName("CPF").WithMessage("Seu cpf não é válido");
+                .NotNull().WithName("CPF").WithMessage("O campo CPF não pode ser nulo.");
+                
 
             RuleFor(x => x.Email)
                 .NotEmpty().WithName("Email").WithMessage("O campo Email não pode estar vazio.")

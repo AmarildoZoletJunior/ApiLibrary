@@ -13,7 +13,7 @@ namespace Biblioteca.Domain.DTO
         public string Nome { get; set; }
         public DateTime DataLancamento { get; set; }
         public int QuantidadePagina { get; set; }
-        public int AutorId { get; set; }
-        public int CategoriaId { get; set; }
+        public Category Categoria { get; set; }
+        public Author Autor { get; set; }
     }
 }

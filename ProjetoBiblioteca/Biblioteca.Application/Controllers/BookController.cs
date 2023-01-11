@@ -7,6 +7,7 @@ using Biblioteca.Infra.Data.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -26,10 +27,10 @@ namespace Biblioteca.Application.Controllers
         public IActionResult GetBooks()
         {
             var books = _bookRepository.GetBooks();
-            var mapeado = Mapper.Map<List<BookDTO>>(books);
-            if (mapeado.Any())
+
+            if (books.Any())
             {
-                return Ok(mapeado);
+                return Ok(books);
             }
             return BadRequest("Não foi encontrado nenhum livro");
         }
@@ -39,10 +40,11 @@ namespace Biblioteca.Application.Controllers
         [Route("GetBook/{id}")]
         public IActionResult GetBook([Required][FromRoute] int id)
         {
-            var autor = _bookRepository.GetBook(id);
-            if (autor != null)
+            var bookUnic = _bookRepository.GetBook(id);
+            if (bookUnic != null)
             {
-                return Ok(autor);
+                var mapeado = Mapper.Map<BookDTO>(bookUnic);
+                return Ok(mapeado);
             }
             return BadRequest("Não foi encontrado nenhum livro");
         }
@@ -75,10 +77,10 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateBook")]
-        public IActionResult UpdateBook([Required][FromBody]BookDTO book)
+        public IActionResult UpdateBook([Required][FromBody]BookRequest book,[Required][FromRoute] int id)
         {
             var mapeamento = Mapper.Map<Book>(book);
-            var unicBook = _bookRepository.GetBook(mapeamento.Id);
+            var unicBook = _bookRepository.GetBook(id);
             if (unicBook != null)
             {
                 _bookRepository.UpdateBook(mapeamento);

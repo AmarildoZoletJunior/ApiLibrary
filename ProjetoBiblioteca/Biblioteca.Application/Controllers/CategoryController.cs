@@ -41,7 +41,8 @@ namespace Biblioteca.Application.Controllers
             var cat = _categoryRepository.GetCategory(id);
             if (cat != null)
             {
-                return Ok(cat);
+                var mapeado = Mapper.Map<CategoryDTO>(cat);
+                return Ok(mapeado);
             }
             return BadRequest();
         }
@@ -74,10 +75,10 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateCategory")]
-        public IActionResult UpdateCategory([Required][FromBody] CategoryDTO category)
+        public IActionResult UpdateCategory([Required][FromBody] CategoryRequest category,[Required][FromRoute] int id)
         {
             var mapeamento = Mapper.Map<Category>(category);
-            var cat = _categoryRepository.GetCategory(mapeamento.Id);
+            var cat = _categoryRepository.GetCategory(id);
             if (cat != null)
             {
                 cat.TipoCategoria = category.TipoCategoria;

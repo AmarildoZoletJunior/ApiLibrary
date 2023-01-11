@@ -37,7 +37,7 @@ namespace Biblioteca.Infra.Data.Repository
 
         public IEnumerable<Book> GetBooks()
         {
-            return _context.Books.ToList();
+            return _context.Books.Include(X => X.Autor).ToList();
         }
 
         public void UpdateBook(Book book)

@@ -35,7 +35,7 @@ namespace Biblioteca.Infra.Data.Repository
 
         public Category GetCategory(int id)
         {
-            return _context.Categories.Include(x => x.Livros.Select(x => x.Nome)).AsNoTracking().FirstOrDefault(a => a.Id == id);
+            return _context.Categories.Include(x => x.Livros).AsNoTracking().FirstOrDefault(a => a.Id == id);
         }
 
         public void UpdateCategory(Category category)

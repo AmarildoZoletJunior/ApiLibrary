@@ -9,6 +9,7 @@ using Biblioteca.Services.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddTransient<IValidator<ClientRequest>, ClientValidation>();
 builder.Services.AddTransient<IValidator<AuthorRequest>, AuthorValidation>();
+builder.Services.AddTransient<IValidator<BookRequest>, BookValidation>();
 builder.Services.AddTransient<IValidator<CategoryRequest>, CategoryValidation>();
 
 
@@ -42,6 +44,7 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddDbContext<ClassContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

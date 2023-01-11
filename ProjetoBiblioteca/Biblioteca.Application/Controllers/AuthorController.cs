@@ -43,7 +43,8 @@ namespace Biblioteca.Application.Controllers
             var autor = _authorRepository.GetAuthor(id);
             if(autor != null)
             {
-                return Ok(autor);
+                var mapeado = Mapper.Map<AuthorDTO>(autor);
+                return Ok(mapeado);
             }
             return BadRequest("Não foi encontrado nenhum autor");
         }
@@ -76,7 +77,7 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateAuthor")]
-        public IActionResult UpdateAuthor([Required][FromBody] AuthorDTO author)
+        public IActionResult UpdateAuthor([Required][FromBody] AuthorRequest author, [Required][FromRoute] int id)
         {
             var mapeamento = Mapper.Map<Author>(author);
             var aut = _authorRepository.GetAuthor(mapeamento.Id);

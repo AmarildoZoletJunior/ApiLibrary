@@ -74,10 +74,10 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateClient")]
-        public IActionResult UpdateCategory([Required][FromBody] ClientDTO Client)
+        public IActionResult UpdateCategory([Required][FromBody] ClientDTO Client,int id)
         {
             var mapeamento = Mapper.Map<Client>(Client);
-            var client = _clientRepository.GetClient(mapeamento.Id);
+            var client = _clientRepository.GetClient(id);
             if (client != null)
             {
                 client.Nome = mapeamento.Nome;

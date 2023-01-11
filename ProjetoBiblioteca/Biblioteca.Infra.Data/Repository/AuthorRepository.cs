@@ -23,14 +23,14 @@ namespace Biblioteca.Infra.Data.Repository
 
         public void DeleteAuthor(int id)
         {
-            var autor = GetAuthor(id);
+            var autor = GetAuthorSolo(id);
             _context.Autores.Remove(autor);
             _context.SaveChanges();
         }
 
         public Author GetAuthor(int id)
         {
-            return _context.Autores.Include(x => x.Livros).AsNoTracking().FirstOrDefault(a => a.Id == id);
+            return _context.Autores.Include(x => x.Livros).ThenInclude(x => x.Categoria).AsNoTracking().FirstOrDefault(a => a.Id == id);
         }
 
         public IEnumerable<Author> GetAuthors()
@@ -42,6 +42,10 @@ namespace Biblioteca.Infra.Data.Repository
         {
             _context.Autores.Update(autor);
             _context.SaveChanges();
+        }
+        public Author GetAuthorSolo(int id)
+        {
+            return _context.Autores.AsNoTracking().FirstOrDefault(a => a.Id == id);
         }
     }
 }
