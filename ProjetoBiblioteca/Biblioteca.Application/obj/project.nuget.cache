@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DzoEAx0tchIqofP6qCkqe3EbEi8JYDkl9x4DL38ysxBona3oquCDafKSd74PMXqwQmo9rOAKLvWtAbm3yLpV/A==",
+  "dgSpecHash": "FKSaKGLfNNWGYW3AOzhsF9qZXhBeNASCWgDGO5WsbxMf+IoNQwLrpvuVie3oCJZDdD3NlrJkRxsXbRga9RyvYQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\amarildojunior_frwk\\Desktop\\Workspace\\ProjetoBiblioteca\\Biblioteca.Application\\Biblioteca.Application.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.2\\microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
     "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.2\\microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512",
     "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.2\\microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
+    "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.2\\microsoft.entityframeworkcore.tools.7.0.2.nupkg.sha512",
     "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\amarildojunior_frwk\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",

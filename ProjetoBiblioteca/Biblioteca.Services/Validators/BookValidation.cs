@@ -13,7 +13,22 @@ namespace Biblioteca.Services.Validators
         public BookValidation()
         {
             RuleFor(x => x.Nome)
-                .NotEmpty().WithName("Nome").WithMessage("O campo Nome não pode ser vazio.").NotNull().WithName("Nome").WithMessage("O campo Nome não pode ser nulo.");
+                .NotEmpty().WithName("Nome").WithMessage("O campo Nome não pode ser vazio.")
+                .NotNull().WithName("Nome").WithMessage("O campo Nome não pode ser nulo.");
+
+            RuleFor(x => x.DataLancamento)
+                .NotEmpty().WithName("DataLançamento").WithMessage("O campo DataLançamento não pode ser vazio.")
+                .NotNull().WithName("DataLançamento").WithMessage("O campo DataLançamento não pode ser nulo.");
+
+            RuleFor(x => x.QuantidadePagina)
+                .NotEmpty().WithName("QuantidadeFolhas").WithMessage("O campo QuantidadeFolhas não pode ser vazio.")
+                .NotNull().WithName("QuantidadeFolhas").WithMessage("O campo QuantidadeFolhas não pode ser nulo.");
+
+
+            RuleFor(x => x.CategoriaId)
+                 .NotEmpty().WithName("CategoriaId").WithMessage("O campo CategoriaId não pode ser vazio.")
+                .NotNull().WithName("CategoriaId").WithMessage("O campo CategoriaId não pode ser nulo.");
+
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Biblioteca.Domain.Repository
         public IEnumerable<Author> GetAuthors();
         public void AddAuthor(AuthorDTO autor);
         public void DeleteAuthor(int id);
-        public void UpdateAuthor(AuthorDTO autor, int id);
+        public void UpdateAuthor(Author autor);
         public Author GetAuthor(int id);
     }
 }
