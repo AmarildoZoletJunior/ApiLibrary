@@ -10,11 +10,9 @@ namespace Biblioteca.Infra.Data.Repository
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ClassContext _context;
-        public IMapper Mapper;
-        public CategoryRepository(ClassContext context, IMapper map)
+        public CategoryRepository(ClassContext context)
         {
             _context = context;
-            Mapper = map;
         }
 
         public void AddCategory(Category category)
@@ -26,8 +24,7 @@ namespace Biblioteca.Infra.Data.Repository
         public void DeleteCategory(int id)
         {
             var category = GetCategory(id);
-            var mapeamento = Mapper.Map<Category>(category);
-            _context.Categories.Remove(mapeamento);
+            _context.Categories.Remove(category);
             _context.SaveChanges();
         }
 

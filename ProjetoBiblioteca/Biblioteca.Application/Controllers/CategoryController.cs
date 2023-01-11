@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca.Application.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -59,10 +61,10 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPost]
         [Route("AddCategory")]
-        public IActionResult AddCategory([Required][FromBody] CategoryRequest category)
+        public IActionResult AddCategory([Required][FromBody]CategoryRequest category)
         {
             Category cat = new Category { TipoCategoria = category.TipoCategoria};
-            if (cat != null)
+            if (category != null)
             {
                 _categoryRepository.AddCategory(cat);
                 return Ok(category);

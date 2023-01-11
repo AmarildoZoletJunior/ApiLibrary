@@ -17,6 +17,8 @@ namespace Biblioteca.Infra.Data.Context
         }
         public DbSet<Author> Autores { get; set; }
         public DbSet<Category> Categories {get;set;}
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Book> Books { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuthorMapping());

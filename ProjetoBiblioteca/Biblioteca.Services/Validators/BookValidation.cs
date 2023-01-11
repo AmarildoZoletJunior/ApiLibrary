@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.DTO.Request;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Services.Validators
 {
-    public class BookValidation : AbstractValidator<BookDTO>
+    public class BookValidation : AbstractValidator<BookRequest>
     {
         public BookValidation()
         {

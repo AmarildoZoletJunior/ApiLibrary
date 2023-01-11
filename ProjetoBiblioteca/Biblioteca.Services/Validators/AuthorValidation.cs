@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Entities;
 using FluentValidation;
 using System;
@@ -9,11 +10,14 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Services.Validators
 {
-    public class AuthorValidation : AbstractValidator<AuthorDTO>
+    public class AuthorValidation : AbstractValidator<AuthorRequest>
     {
         public AuthorValidation()
         {
-            RuleFor(x => x.Nome).NotEmpty().WithName("Nome").WithMessage("O campo Nome não pode ser vazio.").NotNull().WithName("Nome").WithMessage("O campo Nome não pode ser nulo.").MinimumLength(3).WithName("Nome").WithMessage("O campo Nome não pode conter menos de 3 caracteres.");
+            RuleFor(x => x.Nome)
+                .NotEmpty().WithName("Nome").WithMessage("O campo Nome não pode ser vazio.")
+                .NotNull().WithName("Nome").WithMessage("O campo Nome não pode ser nulo.")
+                .MinimumLength(3).WithName("Nome").WithMessage("O campo Nome não pode conter menos de 3 caracteres.");
         }
     }
 }

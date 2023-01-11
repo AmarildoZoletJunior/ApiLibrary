@@ -11,24 +11,20 @@ namespace Biblioteca.Infra.Data.Repository
     public class AuthorRepository : IAuthorRepository
     {
         private readonly ClassContext _context;
-        public IMapper Mapper;
-        public AuthorRepository(ClassContext context,IMapper map)
+        public AuthorRepository(ClassContext context)
         {
             _context = context;
-            Mapper = map;
         }
         public void AddAuthor(Author autor)
         {
-            var mapeamento = Mapper.Map<Author>(autor);
-            _context.Autores.Add(mapeamento);
+            _context.Autores.Add(autor);
             _context.SaveChanges();
         }
 
         public void DeleteAuthor(int id)
         {
             var autor = GetAuthor(id);
-            var mapeamento = Mapper.Map<Author>(autor);
-            _context.Autores.Remove(mapeamento);
+            _context.Autores.Remove(autor);
             _context.SaveChanges();
         }
 
