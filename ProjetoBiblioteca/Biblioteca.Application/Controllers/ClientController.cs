@@ -30,7 +30,7 @@ namespace Biblioteca.Application.Controllers
             {
                 return Ok(mapeado);
             }
-            return BadRequest("Não foi encontrado nenhuma categoria");
+            return BadRequest("Não foi encontrado nenhum cliente");
         }
 
 
@@ -43,7 +43,7 @@ namespace Biblioteca.Application.Controllers
             {
                 return Ok(client);
             }
-            return BadRequest();
+            return BadRequest("Não foi encontrado nenhum cliente");
         }
 
         [HttpDelete]

@@ -32,7 +32,7 @@ namespace Biblioteca.Application.Controllers
             {
                 return Ok(mapeado);
             }
-            return BadRequest("Não foi encontrado nenhuma categoria");
+            return BadRequest("Não foi encontrado nenhum autor");
         }
 
 
@@ -45,7 +45,7 @@ namespace Biblioteca.Application.Controllers
             {
                 return Ok(autor);
             }
-            return BadRequest();
+            return BadRequest("Não foi encontrado nenhum autor");
         }
 
         [HttpDelete]
