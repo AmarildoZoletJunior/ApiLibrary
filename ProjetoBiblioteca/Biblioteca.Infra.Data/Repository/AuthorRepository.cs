@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
@@ -16,7 +17,7 @@ namespace Biblioteca.Infra.Data.Repository
             _context = context;
             Mapper = map;
         }
-        public void AddAuthor(AuthorDTO autor)
+        public void AddAuthor(Author autor)
         {
             var mapeamento = Mapper.Map<Author>(autor);
             _context.Autores.Add(mapeamento);
@@ -33,8 +34,7 @@ namespace Biblioteca.Infra.Data.Repository
 
         public Author GetAuthor(int id)
         {
-            var author = _context.Autores.AsNoTracking().FirstOrDefault(a => a.Id == id);
-            return author;
+            return _context.Autores.Include(x => x.Livros).AsNoTracking().FirstOrDefault(a => a.Id == id);
         }
 
         public IEnumerable<Author> GetAuthors()

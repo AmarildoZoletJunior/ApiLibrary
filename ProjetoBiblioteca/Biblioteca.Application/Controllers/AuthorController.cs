@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Microsoft.AspNetCore.Http;
@@ -40,10 +41,9 @@ namespace Biblioteca.Application.Controllers
         public IActionResult GetAuthor([Required][FromRoute] int id)
         {
             var autor = _authorRepository.GetAuthor(id);
-            var mapeado = Mapper.Map<AuthorDTO>(autor);
             if(autor != null)
             {
-                return Ok(mapeado);
+                return Ok(autor);
             }
             return BadRequest();
         }
@@ -63,17 +63,19 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPost]
         [Route("AddAuthor")]
-        public IActionResult AddAuthor([Required][FromBody]AuthorDTO author)
+        public IActionResult AddAuthor([Required][FromBody]AuthorRequest author)
         {
-            if(author != null)
+            Author autor = new Author { Nome = author.Nome };
+            if (author != null)
             {
-                _authorRepository.AddAuthor(author);
+                _authorRepository.AddAuthor(autor);
                 return Ok(author);
             }
             return BadRequest();
         }
 
         [HttpPut]
+        [Route("UpdateAuthor")]
         public IActionResult UpdateAuthor([Required][FromBody] AuthorDTO author)
         {
             var mapeamento = Mapper.Map<Author>(author);

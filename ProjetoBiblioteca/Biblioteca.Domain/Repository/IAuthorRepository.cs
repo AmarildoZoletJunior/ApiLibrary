@@ -11,7 +11,7 @@ namespace Biblioteca.Domain.Repository
     public interface IAuthorRepository
     {
         public IEnumerable<Author> GetAuthors();
-        public void AddAuthor(AuthorDTO autor);
+        public void AddAuthor(Author autor);
         public void DeleteAuthor(int id);
         public void UpdateAuthor(Author autor);
         public Author GetAuthor(int id);

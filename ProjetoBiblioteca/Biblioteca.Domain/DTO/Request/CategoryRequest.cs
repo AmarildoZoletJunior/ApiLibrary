@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblioteca.Domain.DTO
+namespace Biblioteca.Domain.DTO.Request
 {
-    public class CategoryDTO
+    public class CategoryRequest
     {
-        public int Id { get; set; }
         public string TipoCategoria { get; set; }
     }
 }

@@ -21,6 +21,7 @@ builder.Services.AddTransient<IValidator<AuthorDTO>, AuthorValidation>();
 var configuration = new MapperConfiguration(x => x.AddProfile(new MappingProfile()));
 IMapper mapper = configuration.CreateMapper();
 builder.Services.AddSingleton(mapper);
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddDbContext<ClassContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();

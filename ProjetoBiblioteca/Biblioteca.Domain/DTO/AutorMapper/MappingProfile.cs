@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Entities;
 using System;
 using System.Collections.Generic;
