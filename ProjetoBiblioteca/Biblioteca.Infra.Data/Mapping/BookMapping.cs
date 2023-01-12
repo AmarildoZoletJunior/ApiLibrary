@@ -18,6 +18,7 @@ namespace Biblioteca.Infra.Data.Mapping
             builder.Property(x => x.QuantidadePagina).IsRequired();
             builder.Property(x => x.DataLancamento).IsRequired();
             builder.Property(x => x.Nome).IsRequired();
+            builder.Ignore(x => x.Aluguel);
         }
     }
 }

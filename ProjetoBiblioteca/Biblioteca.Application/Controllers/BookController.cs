@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Biblioteca.Domain.DTO.Request;
-using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Repository;
@@ -8,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using static System.Reflection.Metadata.BlobBuilder;
+using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.DTO.Request;
 
 namespace Biblioteca.Application.Controllers
 {

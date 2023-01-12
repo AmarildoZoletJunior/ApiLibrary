@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Biblioteca.Domain.DTO.Request;
-using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Biblioteca.Domain.DTO.Request;
+using Biblioteca.Domain.DTO;
 
 namespace Biblioteca.Application.Controllers
 {

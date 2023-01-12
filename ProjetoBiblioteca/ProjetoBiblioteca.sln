@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Domain", "Biblio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{7A047D3D-DBCE-436D-A482-651FA8AFAC7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Infra.Data", "Biblioteca.Infra.Data\Biblioteca.Infra.Data.csproj", "{B1F3D49F-5B6D-49C6-8D5A-466E57FA7B40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Infra.Data", "Biblioteca.Infra.Data\Biblioteca.Infra.Data.csproj", "{B1F3D49F-5B6D-49C6-8D5A-466E57FA7B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Services", "Biblioteca.Services\Biblioteca.Services.csproj", "{8090AA9C-D6D2-4ED0-B301-388E3CC3495E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Services", "Biblioteca.Services\Biblioteca.Services.csproj", "{8090AA9C-D6D2-4ED0-B301-388E3CC3495E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

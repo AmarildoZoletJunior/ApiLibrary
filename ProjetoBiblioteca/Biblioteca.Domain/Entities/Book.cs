@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -20,7 +21,7 @@ namespace Biblioteca.Domain.Entities
         [JsonIgnore]
         public Category Categoria { get; set; }
         public int  CategoriaId { get; set; }
-
+        public BookRental Aluguel { get; set; }
         //Relacionamento com estoque
     }
 }

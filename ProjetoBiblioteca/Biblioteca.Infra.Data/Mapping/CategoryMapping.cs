@@ -17,6 +17,7 @@ namespace Biblioteca.Infra.Data.Mapping
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
             builder.HasMany(x => x.Livros).WithOne(x => x.Categoria).HasForeignKey(x => x.CategoriaId);
+
         }
     }
 }

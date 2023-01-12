@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using Biblioteca.Domain.DTO.Request;
-using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Biblioteca.Domain.Exceptions;
+using Biblioteca.Domain.DTO.Request;
+using Biblioteca.Domain.DTO;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -63,13 +64,19 @@ namespace Biblioteca.Application.Controllers
         [Route("AddClient")]
         public IActionResult AddCategory([Required][FromBody] ClientRequest Client)
         {
-            Client client = new Client {  Email = Client.Email, CPF = Client.CPF, Nome = Client.Nome};
-            if (client != null)
+            ClientRequest validar = Client;
+            var validacao = Client.ValidateCpf(_clientRepository);
+            if (!validacao.Ok)
             {
-                _clientRepository.AddClient(client);
-                return Ok(Client);
+                return BadRequest(validacao.ErrorMensagem);
             }
-            return BadRequest();
+                Client client = new Client { Email = Client.Email, CPF = Client.CPF, Nome = Client.Nome };
+                if (client != null)
+                {
+                    _clientRepository.AddClient(client);
+                    return Ok(Client);
+                }
+               return BadRequest();
         }
 
         [HttpPut]

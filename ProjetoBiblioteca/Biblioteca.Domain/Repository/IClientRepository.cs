@@ -14,5 +14,6 @@ namespace Biblioteca.Domain.Repository
         public void DeleteClient(int id);
         public void UpdateClient(Client client);
         public Client GetClient(int id);
+        public bool GetCpf(string cpf);
     }
 }

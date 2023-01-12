@@ -19,9 +19,14 @@ namespace Biblioteca.Infra.Data.Context
         public DbSet<Category> Categories {get;set;}
         public DbSet<Client> Clients { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BookRental> BooksRents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuthorMapping());
+            modelBuilder.ApplyConfiguration(new BookMapping());
+            modelBuilder.ApplyConfiguration(new CategoryMapping());
+            modelBuilder.ApplyConfiguration(new ClientMapping());
+            modelBuilder.ApplyConfiguration(new BookRentalMapping());
         }
     }
 }

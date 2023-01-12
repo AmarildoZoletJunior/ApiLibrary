@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Biblioteca.Domain.Entities
@@ -13,7 +14,7 @@ namespace Biblioteca.Domain.Entities
         public string Nome { get; set; } = null!;
         public string Email { get; set; }
         public Decimal SaldoDevedor { get; set; }
-
+        public BookRental Aluguel { get; set; }
         //Relacionamento com Aluguel
         //Relacionamento com Historico
     }

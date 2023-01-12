@@ -15,5 +15,6 @@ namespace Biblioteca.Domain.DTO
         public int QuantidadePagina { get; set; }
         public Category Categoria { get; set; }
         public Author Autor { get; set; }
+
     }
 }

@@ -48,5 +48,14 @@ namespace Biblioteca.Infra.Data.Repository
             _context.Clients.Update(client);
             _context.SaveChanges();
         }
+        public bool GetCpf(string cpf)
+        {
+            var resultado = _context.Clients.FirstOrDefault(x => x.CPF == cpf);
+            if(resultado != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

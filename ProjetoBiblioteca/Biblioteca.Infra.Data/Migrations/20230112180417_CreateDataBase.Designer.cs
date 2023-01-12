@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Infra.Data.Migrations
 {
     [DbContext(typeof(ClassContext))]
-    [Migration("20230111140315_AddEntitiesBookAndClient")]
-    partial class AddEntitiesBookAndClient
+    [Migration("20230112180417_CreateDataBase")]
+    partial class CreateDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,40 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("Biblioteca.Domain.Entities.BookRental", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataSaida")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataVolta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LivroId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValorAluguel")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
+
+                    b.HasIndex("LivroId")
+                        .IsUnique();
+
+                    b.ToTable("BooksRents");
                 });
 
             modelBuilder.Entity("Biblioteca.Domain.Entities.Category", b =>
@@ -139,14 +173,45 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.Navigation("Categoria");
                 });
 
+            modelBuilder.Entity("Biblioteca.Domain.Entities.BookRental", b =>
+                {
+                    b.HasOne("Biblioteca.Domain.Entities.Client", "Cliente")
+                        .WithOne("Aluguel")
+                        .HasForeignKey("Biblioteca.Domain.Entities.BookRental", "ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Biblioteca.Domain.Entities.Book", "Livro")
+                        .WithOne("Aluguel")
+                        .HasForeignKey("Biblioteca.Domain.Entities.BookRental", "LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Livro");
+                });
+
             modelBuilder.Entity("Biblioteca.Domain.Entities.Author", b =>
                 {
                     b.Navigation("Livros");
                 });
 
+            modelBuilder.Entity("Biblioteca.Domain.Entities.Book", b =>
+                {
+                    b.Navigation("Aluguel")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Biblioteca.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Livros");
+                });
+
+            modelBuilder.Entity("Biblioteca.Domain.Entities.Client", b =>
+                {
+                    b.Navigation("Aluguel")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
