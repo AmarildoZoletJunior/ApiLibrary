@@ -72,7 +72,11 @@ namespace Biblioteca.Application.Controllers
             {
                 return BadRequest();
             }
-
+            var validacao = bookR.ValidarBook(_exist,_bookRepository);
+            if (!validacao.Ok)
+            {
+                return BadRequest(validacao.ErrorMensagem);
+            }
             Book book = new Book { DataLancamento = bookR.DataLancamento, Nome = bookR.Nome, CategoriaId = bookR.CategoriaId, AutorId = bookR.AutorId, QuantidadePagina = bookR.QuantidadePagina };
             _bookRepository.AddBook(book);
             return Ok(bookR);

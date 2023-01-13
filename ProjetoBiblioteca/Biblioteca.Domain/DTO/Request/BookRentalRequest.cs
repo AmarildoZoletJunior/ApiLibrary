@@ -34,6 +34,7 @@ namespace Biblioteca.Domain.DTO.Request
             }
 
             var busca = bookRental.GetClientBookRental(this.ClienteId);
+
             if(busca != null)
             {
               return  Result.Failure("Este cliente ja tem um livro alugado");
