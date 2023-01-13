@@ -16,10 +16,12 @@ namespace Biblioteca.Application.Controllers
 
         private readonly IAuthorRepository _authorRepository;
         public IMapper Mapper;
-        public AuthorController(IAuthorRepository authorRepository, IMapper mapper)
+        private readonly IValidationExist _exist;
+        public AuthorController(IAuthorRepository authorRepository,IValidationExist exist, IMapper mapper)
         {
             _authorRepository = authorRepository;
             Mapper = mapper;
+                _exist = exist;
         }
 
         [HttpGet]
@@ -76,16 +78,16 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateAuthor")]
+        [Route("UpdateAuthor/{id}")]
         public IActionResult UpdateAuthor([Required][FromBody] AuthorRequest author, [Required][FromRoute] int id)
         {
-            var mapeamento = Mapper.Map<Author>(author);
-            var aut = _authorRepository.GetAuthor(mapeamento.Id);
+            var mapeado = Mapper.Map<Author>(author);
+            var aut = _authorRepository.GetAuthorSolo(id);
             if(aut != null)
             {
                 aut.Nome = author.Nome;
-                _authorRepository.UpdateAuthor(mapeamento);
-                return Ok(author);
+                _authorRepository.UpdateAuthor(aut);
+                return Ok(aut);
             }
             return BadRequest();
         }

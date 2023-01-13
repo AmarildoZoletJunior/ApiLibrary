@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Biblioteca.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDataBase : Migration
+    public partial class CreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -89,7 +89,7 @@ namespace Biblioteca.Infra.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataSaida = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataVolta = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataEstimadaVolta = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ValorAluguel = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     LivroId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false)

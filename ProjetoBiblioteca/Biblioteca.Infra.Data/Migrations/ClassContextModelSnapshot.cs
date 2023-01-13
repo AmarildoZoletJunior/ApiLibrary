@@ -83,10 +83,10 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataSaida")
+                    b.Property<DateTime>("DataEstimadaVolta")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataVolta")
+                    b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LivroId")

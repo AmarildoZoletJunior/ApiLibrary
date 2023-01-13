@@ -10,10 +10,10 @@ namespace Biblioteca.Domain.DTO
     public class BookRentalDTO
     {
         public DateTime DataSaida { get; set; }
-        public DateTime DataVolta { get; set; }
+        public DateTime DataEstimadaVolta { get; set; }
         public decimal ValorAluguel { get; set; }
-        public int LivroId { get; set; }
-        public int ClienteId { get; set; }
+        public ClientDTO Cliente { get; set; }
+        public BookDTO Livro { get; set; }
 
     }
 }

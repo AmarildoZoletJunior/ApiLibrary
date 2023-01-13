@@ -17,10 +17,12 @@ namespace Biblioteca.Application.Controllers
     {
         private readonly IBookRepository _bookRepository;
         public IMapper Mapper;
-        public BookController(IBookRepository bookRepository, IMapper mapper)
+        private readonly IValidationExist _exist;
+        public BookController(IBookRepository bookRepository,IValidationExist exist, IMapper mapper)
         {
             _bookRepository = bookRepository;
             Mapper = mapper;
+            _exist = exist;
         }
         [HttpGet]
         [Route("GetBooks")]
@@ -66,24 +68,30 @@ namespace Biblioteca.Application.Controllers
         [Route("AddBook")]
         public IActionResult AddBook([Required][FromBody] BookRequest bookR)
         {
-            Book book = new Book { DataLancamento = bookR.DataLancamento, Nome = bookR.Nome, CategoriaId = bookR.CategoriaId, AutorId = bookR.AutorId, QuantidadePagina = bookR.QuantidadePagina };
-            if (bookR != null)
+            if (bookR == null)
             {
-                _bookRepository.AddBook(book);
-                return Ok(book);
+                return BadRequest();
             }
-            return BadRequest();
-        }
 
+            Book book = new Book { DataLancamento = bookR.DataLancamento, Nome = bookR.Nome, CategoriaId = bookR.CategoriaId, AutorId = bookR.AutorId, QuantidadePagina = bookR.QuantidadePagina };
+            _bookRepository.AddBook(book);
+            return Ok(bookR);
+        }
+        
         [HttpPut]
-        [Route("UpdateBook")]
+        [Route("UpdateBook/{id}")]
         public IActionResult UpdateBook([Required][FromBody]BookRequest book,[Required][FromRoute] int id)
         {
             var mapeamento = Mapper.Map<Book>(book);
             var unicBook = _bookRepository.GetBook(id);
             if (unicBook != null)
             {
-                _bookRepository.UpdateBook(mapeamento);
+                unicBook.DataLancamento = book.DataLancamento;
+                unicBook.QuantidadePagina = book.QuantidadePagina;
+                unicBook.AutorId = book.AutorId;
+                unicBook.Nome = book.Nome;
+                unicBook.CategoriaId = book.CategoriaId;
+                _bookRepository.UpdateBook(unicBook);
                 return Ok(book);
             }
             return BadRequest();

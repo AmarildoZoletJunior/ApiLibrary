@@ -17,6 +17,12 @@ namespace Biblioteca.Domain.DTO.AutorMapper
             CreateMap<Book, BookDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<Client, ClientDTO>().ReverseMap();
+            CreateMap<BookRental, BookRentalDTO>().ReverseMap();
+            CreateMap<Author, AuthorRequest>().ReverseMap();
+            CreateMap<Book, BookRequest>().ReverseMap();
+            CreateMap<Category, CategoryRequest>().ReverseMap();
+            CreateMap<Client, ClientRequest>().ReverseMap();
+            CreateMap<BookRental, BookRentalRequest>().ReverseMap();
         }
     }
 }

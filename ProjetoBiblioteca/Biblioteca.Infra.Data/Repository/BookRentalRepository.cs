@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace Biblioteca.Infra.Data.Repository
 
         public BookRental GetRental(int id)
         {
-            return _context.BooksRents.FirstOrDefault(x => x.ClienteId == id);
+            return _context.BooksRents.Include(x => x.Cliente).Include(x => x.Livro).ThenInclude(x => x.Autor).Include(x => x.Livro).ThenInclude(x => x.Categoria).FirstOrDefault(x => x.ClienteId == id);
         }
 
         public IEnumerable<BookRental> GetRents()
@@ -64,6 +65,15 @@ namespace Biblioteca.Infra.Data.Repository
         {
             _context.BooksRents.Update(book);
             _context.SaveChanges();
+        }
+        public bool BookExists(int id)
+        {
+            var book = _context.Books.FirstOrDefault(x => x.Id == id);
+            if(book != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

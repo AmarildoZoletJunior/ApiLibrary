@@ -15,10 +15,12 @@ namespace Biblioteca.Application.Controllers
     {
         private readonly IClientRepository _clientRepository;
         public IMapper Mapper;
-        public ClientController(IClientRepository clientRepository, IMapper mapper)
+        private readonly IValidationExist _exist;
+        public ClientController(IClientRepository clientRepository,IValidationExist exist, IMapper mapper)
         {
             _clientRepository = clientRepository;
             Mapper = mapper;
+            _exist = exist;
         }
 
         [HttpGet]
@@ -64,7 +66,6 @@ namespace Biblioteca.Application.Controllers
         [Route("AddClient")]
         public IActionResult AddCategory([Required][FromBody] ClientRequest Client)
         {
-            ClientRequest validar = Client;
             var validacao = Client.ValidateCpf(_clientRepository);
             if (!validacao.Ok)
             {
@@ -81,7 +82,7 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateClient")]
-        public IActionResult UpdateCategory([Required][FromBody] ClientDTO Client,int id)
+        public IActionResult UpdateCategory([Required][FromBody] ClientRequest Client,int id)
         {
             var mapeamento = Mapper.Map<Client>(Client);
             var client = _clientRepository.GetClient(id);

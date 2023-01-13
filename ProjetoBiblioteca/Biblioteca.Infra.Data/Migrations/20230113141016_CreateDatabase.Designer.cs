@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Infra.Data.Migrations
 {
     [DbContext(typeof(ClassContext))]
-    [Migration("20230112180417_CreateDataBase")]
-    partial class CreateDataBase
+    [Migration("20230113141016_CreateDatabase")]
+    partial class CreateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,10 +86,10 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataSaida")
+                    b.Property<DateTime>("DataEstimadaVolta")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataVolta")
+                    b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LivroId")

@@ -14,5 +14,6 @@ namespace Biblioteca.Domain.Repository
         public void DeleteBook(int id);
         public void UpdateBook(Book book);
         public Book GetBook(int id);
+
     }
 }

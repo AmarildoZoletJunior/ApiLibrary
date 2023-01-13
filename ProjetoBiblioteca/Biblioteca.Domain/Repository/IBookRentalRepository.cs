@@ -15,6 +15,5 @@ namespace Biblioteca.Domain.Repository
         public void UpdateRental(BookRental book);
         public BookRental GetRental(int id);
         public bool GetClientBookRental(int id);
-        public bool ClientExists(int id);
     }
 }

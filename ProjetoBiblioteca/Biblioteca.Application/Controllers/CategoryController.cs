@@ -14,10 +14,12 @@ namespace Biblioteca.Application.Controllers
     {
         private readonly ICategoryRepository _categoryRepository;
         public IMapper Mapper;
-        public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
+        private readonly IValidationExist _exist;
+        public CategoryController(ICategoryRepository categoryRepository,IValidationExist exist, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
             Mapper = mapper;
+                _exist = exist;
         }
 
         [HttpGet]
@@ -74,16 +76,15 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateCategory")]
+        [Route("UpdateCategory/{id}")]
         public IActionResult UpdateCategory([Required][FromBody] CategoryRequest category,[Required][FromRoute] int id)
         {
-            var mapeamento = Mapper.Map<Category>(category);
             var cat = _categoryRepository.GetCategory(id);
             if (cat != null)
             {
                 cat.TipoCategoria = category.TipoCategoria;
-                _categoryRepository.UpdateCategory(mapeamento);
-                return Ok(cat);
+                _categoryRepository.UpdateCategory(cat);
+                return Ok(category);
             }
             return BadRequest();
         }

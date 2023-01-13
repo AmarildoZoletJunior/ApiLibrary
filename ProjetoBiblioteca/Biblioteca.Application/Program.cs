@@ -2,6 +2,7 @@ using AutoMapper;
 using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.DTO.AutorMapper;
 using Biblioteca.Domain.DTO.Request;
+using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
 using Biblioteca.Infra.Data.Repository;
@@ -25,7 +26,7 @@ builder.Services.AddTransient<IValidator<ClientRequest>, ClientValidation>();
 builder.Services.AddTransient<IValidator<AuthorRequest>, AuthorValidation>();
 builder.Services.AddTransient<IValidator<BookRequest>, BookValidation>();
 builder.Services.AddTransient<IValidator<CategoryRequest>, CategoryValidation>();
-
+builder.Services.AddTransient<IValidator<BookRentalRequest>, BookRentalValidation>();
 
 #endregion
 
@@ -40,6 +41,9 @@ builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBookRentalRepository, BookRentalRepository>();
+builder.Services.AddScoped<IValidationExist, ValidationExist>();
+
 #endregion
 
 builder.Services.AddDbContext<ClassContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

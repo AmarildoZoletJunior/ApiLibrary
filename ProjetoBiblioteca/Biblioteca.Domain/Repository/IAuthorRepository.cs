@@ -15,5 +15,6 @@ namespace Biblioteca.Domain.Repository
         public void DeleteAuthor(int id);
         public void UpdateAuthor(Author autor);
         public Author GetAuthor(int id);
+        public Author GetAuthorSolo(int id);
     }
 }
