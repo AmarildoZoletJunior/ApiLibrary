@@ -27,9 +27,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetAuthors")]
-        public IActionResult GetAuthors([FromQuery] PageParameters parameters)
+        public async Task<IActionResult> GetAuthorsAsync([FromQuery] PageParameters parameters)
         {
-            var autores = _authorRepository.GetAuthors(parameters);
+            var autores = await _authorRepository.GetAuthors(parameters);
             var mapeado = Mapper.Map<List<AuthorDTO>>(autores);
             if (mapeado.Any())
             {
@@ -41,9 +41,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetAuthor/{id}")]
-        public IActionResult GetAuthor([Required][FromRoute] int id)
+        public async Task<IActionResult> GetAuthorAsync([Required][FromRoute] int id)
         {
-            var autor = _authorRepository.GetAuthor(id);
+            var autor = await _authorRepository.GetAuthor(id);
             if(autor != null)
             {
                 var mapeado = Mapper.Map<AuthorDTO>(autor);
@@ -54,12 +54,12 @@ namespace Biblioteca.Application.Controllers
 
         [HttpDelete]
         [Route("DeleteAuthor/{id}")]
-        public IActionResult DeleteAuthor([Required][FromRoute] int id)
+        public async Task<IActionResult> DeleteAuthorAsync([Required][FromRoute] int id)
         {
-            var autor = _authorRepository.GetAuthor(id);
+            var autor = await _authorRepository.GetAuthor(id);
             if(autor != null)
             {
-                _authorRepository.DeleteAuthor(id);
+                await _authorRepository.DeleteAuthor(id);
                 return Ok();
             }
             return BadRequest();

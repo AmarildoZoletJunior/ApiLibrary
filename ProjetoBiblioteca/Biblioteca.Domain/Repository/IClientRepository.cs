@@ -10,10 +10,10 @@ namespace Biblioteca.Domain.Repository
 {
     public interface IClientRepository
     {
-        public IEnumerable<Client> GetClients(PageParameters parametros);
+        public Task<IEnumerable<Client>> GetClients(PageParameters parametros);
         public void AddClient(Client client);
-        public void DeleteClientAsync(int id);
-        public void UpdateClient(Client client);
+        public Task DeleteClientAsync(int id);
+        public Task UpdateClient(Client client);
         public Task<Client> GetClient(int id);
         public bool GetCpf(string cpf);
     }

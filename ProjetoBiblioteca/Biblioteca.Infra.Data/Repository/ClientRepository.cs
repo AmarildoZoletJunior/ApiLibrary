@@ -26,10 +26,10 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public async void DeleteClientAsync(int id)
+        public async Task DeleteClientAsync(int id)
         {
             var client = await GetClient(id);
-            _context.Clients.Remove(client);
+             _context.Clients.Remove(client);
             _context.SaveChanges();
         }
 
@@ -39,15 +39,15 @@ namespace Biblioteca.Infra.Data.Repository
             return await _context.Clients.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public IEnumerable<Client> GetClients(PageParameters parametros)
+        public async Task<IEnumerable<Client>> GetClients(PageParameters parametros)
         {
-            return _context.Clients.OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
+            return await _context.Clients.OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
         }
 
-        public void UpdateClient(Client client)
+        public async Task UpdateClient(Client client)
         {
             _context.Clients.Update(client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
         public bool GetCpf(string cpf)
         {

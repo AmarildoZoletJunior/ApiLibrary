@@ -35,11 +35,11 @@ namespace Biblioteca.Infra.Data.Repository
             return true;
         }
 
-        public void DeleteRental(int id)
+        public async Task DeleteRentalAsync(int id)
         {
-            var deletar = _context.BooksRents.FirstOrDefault(x => x.Id == id);
+            var deletar = await _context.BooksRents.FirstOrDefaultAsync(x => x.Id == id);
             _context.BooksRents.Remove(deletar);
-            _context.SaveChanges();
+             await _context.SaveChangesAsync();
         }
 
         public bool GetClientBookRental(int id)
@@ -54,18 +54,18 @@ namespace Biblioteca.Infra.Data.Repository
 
         public async Task<BookRental> GetRental(int id)
         {
-            return  await _context.BooksRents.Include(x => x.Cliente).Include(x => x.Livro).ThenInclude(x => x.Autor).Include(x => x.Livro).ThenInclude(x => x.Categoria).FirstOrDefaultAsync(x => x.ClienteId == id);
+            return  await _context.BooksRents.Include(x => x.Cliente).Include(x => x.Livro).ThenInclude(x => x.Autor).Include(x => x.Livro).ThenInclude(x => x.Categoria).SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public IEnumerable<BookRental> GetRents(PageParameters parametros)
+        public async Task<IEnumerable<BookRental>> GetRents(PageParameters parametros)
         {
-            return _context.BooksRents.OrderBy(x => x.ValorAluguel).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
+            return await _context.BooksRents.OrderBy(x => x.ValorAluguel).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
         }
 
-        public void UpdateRental(BookRental book)
+        public async Task UpdateRentalAsync(BookRental book)
         {
             _context.BooksRents.Update(book);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
         public bool BookExists(int id)
         {

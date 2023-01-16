@@ -26,9 +26,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetClients")]
-        public IActionResult GetClients([FromQuery] PageParameters parameters)
+        public async Task<IActionResult> GetClientsAsync([FromQuery] PageParameters parameters)
         {
-            var clients = _clientRepository.GetClients(parameters);
+            var clients = await _clientRepository.GetClients(parameters);
             var mapeado = Mapper.Map<List<ClientDTO>>(clients);
             if (mapeado.Any())
             {
@@ -40,9 +40,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetClient/{id}")]
-        public IActionResult GetClient([Required][FromRoute] int id)
+        public async Task<IActionResult> GetClientAsync([Required][FromRoute] int id)
         {
-            var client = _clientRepository.GetClient(id);
+            var client = await _clientRepository.GetClient(id);
             if (client != null)
             {
                 return Ok(client);
@@ -52,15 +52,15 @@ namespace Biblioteca.Application.Controllers
 
         [HttpDelete]
         [Route("DeleteClient/{id}")]
-        public IActionResult DeleteClient([Required][FromRoute] int id)
+        public async Task<IActionResult> DeleteClient([Required][FromRoute] int id)
         {
-            var client = _clientRepository.GetClient(id);
+            var client = await _clientRepository.GetClient(id);
             if (client != null)
             {
-                _clientRepository.DeleteClientAsync(id);
-                return Ok();
+                await _clientRepository.DeleteClientAsync(id);
+                return Ok(client);
             }
-            return BadRequest();
+            return BadRequest("Não foi possivel deletar");
         }
 
         [HttpPost]
@@ -91,7 +91,7 @@ namespace Biblioteca.Application.Controllers
             {
                 client.Nome = mapeamento.Nome;
                 client.Email = mapeamento.Email;
-                _clientRepository.UpdateClient(mapeamento);
+                await _clientRepository.UpdateClient(client);
                 return Ok(client);
             }
             return BadRequest();

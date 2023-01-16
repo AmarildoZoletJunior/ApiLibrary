@@ -22,16 +22,16 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public async void DeleteCategory(int id)
+        public async Task DeleteCategory(int id)
         {
             var category = await GetCategory(id);
             _context.Categories.Remove(category);
             _context.SaveChanges();
         }
 
-        public IEnumerable<Category> GetCategories(PageParameters parametros)
+        public async Task<IEnumerable<Category>> GetCategories(PageParameters parametros)
         {
-            return _context.Categories.OrderBy(x => x.TipoCategoria).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
+            return await _context.Categories.OrderBy(x => x.TipoCategoria).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
         }
 
         public async Task<Category> GetCategory(int id)
@@ -39,10 +39,10 @@ namespace Biblioteca.Infra.Data.Repository
             return await _context.Categories.Include(x => x.Livros).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public void UpdateCategory(Category category)
+        public async Task UpdateCategory(Category category)
         {
             _context.Categories.Update(category);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

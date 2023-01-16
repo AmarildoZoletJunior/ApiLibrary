@@ -26,9 +26,9 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllRental([FromQuery] PageParameters parameters)
+        public async Task<IActionResult> GetAllRentalAsync([FromQuery] PageParameters parameters)
         {
-            var alugueis = _bookRentalRepository.GetRents(parameters);
+            var alugueis = await _bookRentalRepository.GetRents(parameters);
             if (alugueis.Any())
             {
                 var mapeado = Mapper.Map<List<BookRentalDTO>>(alugueis);
@@ -38,9 +38,9 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetRental([Required][FromRoute]int id)
+        public async Task<IActionResult> GetRentalAsync([Required][FromRoute]int id)
         {
-            var aluguel = _bookRentalRepository.GetRental(id);
+            var aluguel = await _bookRentalRepository.GetRental(id);
             if (aluguel != null)
             {
                 var mapeado = Mapper.Map<BookRentalDTO>(aluguel);
@@ -65,13 +65,13 @@ namespace Biblioteca.Application.Controllers
 
 
         [HttpDelete("{id:int}")]
-        public IActionResult RemoveRental([Required][FromRoute] int id)
+        public async Task<IActionResult> RemoveRentalAsync([Required][FromRoute] int id)
         {
-            var rental = _bookRentalRepository.GetRental(id);
+            var rental = await _bookRentalRepository.GetRental(id);
             if(rental != null)
             {
-                _bookRentalRepository.DeleteRental(id);
-                return Ok();
+               await _bookRentalRepository.DeleteRentalAsync(id);
+                return Ok(rental);
             }
             return NotFound();
         }
@@ -79,7 +79,6 @@ namespace Biblioteca.Application.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateRentalAsync([Required][FromBody] BookRentalRequest request,int id)
         {
-            var mapeamento = Mapper.Map<BookRental>(request);
             var unicBook = await _bookRentalRepository.GetRental(id);
             if (unicBook != null)
             {
@@ -87,8 +86,8 @@ namespace Biblioteca.Application.Controllers
                 unicBook.DataSaida = request.DataSaida;
                 unicBook.ClienteId = request.ClienteId;
                 unicBook.LivroId = request.LivroId;
-                _bookRentalRepository.UpdateRental(mapeamento);
-                return Ok(request);
+               await _bookRentalRepository.UpdateRentalAsync(unicBook);
+                return Ok(unicBook);
             }
             return BadRequest();
         }

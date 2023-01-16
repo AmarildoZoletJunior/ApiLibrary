@@ -24,11 +24,11 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public async void DeleteBookAsync(int id)
+        public async Task DeleteBookAsync(int id)
         {
             var book = await GetBook(id);
             _context.Books.Remove(book);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
         public async Task<Book> GetBook(int id)
@@ -36,15 +36,15 @@ namespace Biblioteca.Infra.Data.Repository
             return await _context.Books.Include(X => X.Autor).Include(X => X.Categoria).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public IEnumerable<Book> GetBooks(PageParameters parametros)
+        public async Task<IEnumerable<Book>> GetBooks(PageParameters parametros)
         {
-            return _context.Books.Include(X => X.Autor).OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
+            return await _context.Books.Include(X => X.Autor).OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
         }
 
-        public void UpdateBook(Book book)
+        public async Task UpdateBook(Book book)
         {
             _context.Books.Update(book);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
     }

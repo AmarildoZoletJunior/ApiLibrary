@@ -11,10 +11,10 @@ namespace Biblioteca.Domain.Repository
 {
     public interface IAuthorRepository
     {
-        public IEnumerable<Author> GetAuthors(PageParameters parametros);
+        public Task<IEnumerable<Author>> GetAuthors(PageParameters parametros);
         public void AddAuthor(Author autor);
-        public void DeleteAuthor(int id);
-        public void UpdateAuthor(Author autor);
+        public Task DeleteAuthor(int id);
+        public Task UpdateAuthor(Author autor);
         public Task<Author> GetAuthor(int id);
         public Task<Author> GetAuthorSolo(int id);
     }

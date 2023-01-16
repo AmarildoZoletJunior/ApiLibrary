@@ -11,10 +11,10 @@ namespace Biblioteca.Domain.Repository
 {
     public interface ICategoryRepository
     {
-        public IEnumerable<Category> GetCategories(PageParameters parametros);
+        public Task<IEnumerable<Category>> GetCategories(PageParameters parametros);
         public void AddCategory(Category category);
-        public void DeleteCategory(int id);
-        public void UpdateCategory(Category category);
+        public Task DeleteCategory(int id);
+        public Task UpdateCategory(Category category);
         public Task<Category> GetCategory(int id);
     }
 }

@@ -25,9 +25,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetCategories")]
-        public IActionResult GetCategories([FromQuery] PageParameters parameters)
+        public async Task<IActionResult> GetCategoriesAsync([FromQuery] PageParameters parameters)
         {
-            var categories = _categoryRepository.GetCategories(parameters);
+            var categories =  await _categoryRepository.GetCategories(parameters);
             var mapeado = Mapper.Map<List<CategoryDTO>>(categories);
             if (mapeado.Any())
             {
@@ -39,9 +39,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetCategory/{id}")]
-        public IActionResult GetCategory([Required][FromRoute] int id)
+        public async Task<IActionResult> GetCategoryAsync([Required][FromRoute] int id)
         {
-            var cat = _categoryRepository.GetCategory(id);
+            var cat = await _categoryRepository.GetCategory(id);
             if (cat != null)
             {
                 var mapeado = Mapper.Map<CategoryDTO>(cat);
@@ -52,12 +52,12 @@ namespace Biblioteca.Application.Controllers
 
         [HttpDelete]
         [Route("DeleteCategory/{id}")]
-        public IActionResult DeleteCategory([Required][FromRoute] int id)
+        public async Task<IActionResult> DeleteCategoryAsync([Required][FromRoute] int id)
         {
-            var cat = _categoryRepository.GetCategory(id);
+            var cat = await _categoryRepository.GetCategory(id);
             if (cat != null)
             {
-                _categoryRepository.DeleteCategory(id);
+                await _categoryRepository.DeleteCategory(id);
                 return Ok();
             }
             return BadRequest();

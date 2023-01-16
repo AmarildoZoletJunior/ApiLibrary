@@ -22,11 +22,11 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public async void DeleteAuthor(int id)
+        public async Task DeleteAuthor(int id)
         {
             var autor = await GetAuthorSolo(id);
             _context.Autores.Remove(autor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Author> GetAuthor(int id)
@@ -34,15 +34,15 @@ namespace Biblioteca.Infra.Data.Repository
             return await _context.Autores.Include(x => x.Livros).ThenInclude(x => x.Categoria).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public IEnumerable<Author> GetAuthors(PageParameters parametros)
+        public async Task<IEnumerable<Author>> GetAuthors(PageParameters parametros)
         {
-            return _context.Autores.OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
+            return await _context.Autores.OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
         }
 
-        public void UpdateAuthor(Author autor)
+        public async Task UpdateAuthor(Author autor)
         {
             _context.Autores.Update(autor);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
         public async Task<Author> GetAuthorSolo(int id)
         {

@@ -9,6 +9,7 @@ namespace Biblioteca.Domain.DTO
 {
     public class BookRentalDTO
     {
+        public int Id { get; set; }
         public DateTime DataSaida { get; set; }
         public DateTime DataEstimadaVolta { get; set; }
         public decimal ValorAluguel { get; set; }

@@ -27,9 +27,9 @@ namespace Biblioteca.Application.Controllers
         }
         [HttpGet]
         [Route("GetBooks")]
-        public IActionResult GetBooks([FromQuery] PageParameters parameters)
+        public async Task<IActionResult> GetBooksAsync([FromQuery] PageParameters parameters)
         {
-            var books = _bookRepository.GetBooks(parameters);
+            var books = await _bookRepository.GetBooks(parameters);
 
             if (books.Any())
             {
@@ -41,9 +41,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetBook/{id}")]
-        public IActionResult GetBook([Required][FromRoute] int id)
+        public async Task<IActionResult> GetBookAsync([Required][FromRoute] int id)
         {
-            var bookUnic = _bookRepository.GetBook(id);
+            var bookUnic = await _bookRepository.GetBook(id);
             if (bookUnic != null)
             {
                 var mapeado = Mapper.Map<BookDTO>(bookUnic);
@@ -54,12 +54,12 @@ namespace Biblioteca.Application.Controllers
 
         [HttpDelete]
         [Route("DeleteBook/{id}")]
-        public IActionResult DeleteBook([Required][FromRoute] int id)
+        public async Task<IActionResult> DeleteBookAsync([Required][FromRoute] int id)
         {
-            var autor = _bookRepository.GetBook(id);
+            var autor = await _bookRepository.GetBook(id);
             if (autor != null)
             {
-                _bookRepository.DeleteBookAsync(id);
+                await _bookRepository.DeleteBookAsync(id);
                 return Ok();
             }
             return BadRequest();
@@ -87,7 +87,6 @@ namespace Biblioteca.Application.Controllers
         [Route("UpdateBook/{id}")]
         public async Task<IActionResult> UpdateBook([Required][FromBody]BookRequest book,[Required][FromRoute] int id)
         {
-            var mapeamento = Mapper.Map<Book>(book);
             var unicBook = await  _bookRepository.GetBook(id);
             if (unicBook != null)
             {
@@ -96,8 +95,8 @@ namespace Biblioteca.Application.Controllers
                 unicBook.AutorId = book.AutorId;
                 unicBook.Nome = book.Nome;
                 unicBook.CategoriaId = book.CategoriaId;
-                _bookRepository.UpdateBook(unicBook);
-                return Ok(book);
+                await _bookRepository.UpdateBook(unicBook);
+                return Ok(unicBook);
             }
             return BadRequest();
         }
