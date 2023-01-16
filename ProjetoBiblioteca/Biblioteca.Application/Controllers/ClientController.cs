@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Biblioteca.Domain.Exceptions;
 using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.Pagination;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -25,9 +26,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetClients")]
-        public IActionResult GetCategories()
+        public IActionResult GetClients([FromQuery] PageParameters parameters)
         {
-            var clients = _clientRepository.GetClients();
+            var clients = _clientRepository.GetClients(parameters);
             var mapeado = Mapper.Map<List<ClientDTO>>(clients);
             if (mapeado.Any())
             {
@@ -39,7 +40,7 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetClient/{id}")]
-        public IActionResult GetCategory([Required][FromRoute] int id)
+        public IActionResult GetClient([Required][FromRoute] int id)
         {
             var client = _clientRepository.GetClient(id);
             if (client != null)
@@ -51,12 +52,12 @@ namespace Biblioteca.Application.Controllers
 
         [HttpDelete]
         [Route("DeleteClient/{id}")]
-        public IActionResult DeleteCategory([Required][FromRoute] int id)
+        public IActionResult DeleteClient([Required][FromRoute] int id)
         {
             var client = _clientRepository.GetClient(id);
             if (client != null)
             {
-                _clientRepository.DeleteClient(id);
+                _clientRepository.DeleteClientAsync(id);
                 return Ok();
             }
             return BadRequest();
@@ -64,7 +65,7 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPost]
         [Route("AddClient")]
-        public IActionResult AddCategory([Required][FromBody] ClientRequest Client)
+        public IActionResult AddClient([Required][FromBody] ClientRequest Client)
         {
             var validacao = Client.ValidateCpf(_clientRepository);
             if (!validacao.Ok)
@@ -82,10 +83,10 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateClient")]
-        public IActionResult UpdateCategory([Required][FromBody] ClientRequest Client,int id)
+        public async Task<IActionResult> UpdateClientAsync([Required][FromBody] ClientRequest Client,int id)
         {
             var mapeamento = Mapper.Map<Client>(Client);
-            var client = _clientRepository.GetClient(id);
+            var client = await _clientRepository.GetClient(id);
             if (client != null)
             {
                 client.Nome = mapeamento.Nome;

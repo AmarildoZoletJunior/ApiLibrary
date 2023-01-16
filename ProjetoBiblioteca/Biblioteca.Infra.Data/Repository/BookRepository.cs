@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -23,21 +24,21 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public void DeleteBook(int id)
+        public async void DeleteBookAsync(int id)
         {
-            var book = GetBook(id);
+            var book = await GetBook(id);
             _context.Books.Remove(book);
             _context.SaveChanges();
         }
 
-        public Book GetBook(int id)
+        public async Task<Book> GetBook(int id)
         {
-            return _context.Books.Include(X => X.Autor).Include(X => X.Categoria).AsNoTracking().FirstOrDefault(a => a.Id == id);
+            return await _context.Books.Include(X => X.Autor).Include(X => X.Categoria).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public IEnumerable<Book> GetBooks()
+        public IEnumerable<Book> GetBooks(PageParameters parametros)
         {
-            return _context.Books.Include(X => X.Autor).ToList();
+            return _context.Books.Include(X => X.Autor).OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
         }
 
         public void UpdateBook(Book book)
@@ -45,5 +46,6 @@ namespace Biblioteca.Infra.Data.Repository
             _context.Books.Update(book);
             _context.SaveChanges();
         }
+
     }
 }

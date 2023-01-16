@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -25,22 +26,22 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public void DeleteClient(int id)
+        public async void DeleteClientAsync(int id)
         {
-            var client = GetClient(id);
+            var client = await GetClient(id);
             _context.Clients.Remove(client);
             _context.SaveChanges();
         }
 
-        public Client GetClient(int id)
+        public async Task<Client> GetClient(int id)
         {
             //Depois incluir todos os relacionamentos para aparecer quando necessário
-            return _context.Clients.AsNoTracking().FirstOrDefault(a => a.Id == id);
+            return await _context.Clients.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public IEnumerable<Client> GetClients()
+        public IEnumerable<Client> GetClients(PageParameters parametros)
         {
-            return _context.Clients.ToList();
+            return _context.Clients.OrderBy(x => x.Nome).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
         }
 
         public void UpdateClient(Client client)

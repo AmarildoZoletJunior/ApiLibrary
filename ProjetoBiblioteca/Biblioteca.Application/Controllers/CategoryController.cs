@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.DTO;
+using Biblioteca.Domain.Pagination;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -24,9 +25,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetCategories")]
-        public IActionResult GetCategories()
+        public IActionResult GetCategories([FromQuery] PageParameters parameters)
         {
-            var categories = _categoryRepository.GetCategories();
+            var categories = _categoryRepository.GetCategories(parameters);
             var mapeado = Mapper.Map<List<CategoryDTO>>(categories);
             if (mapeado.Any())
             {
@@ -77,9 +78,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateCategory/{id}")]
-        public IActionResult UpdateCategory([Required][FromBody] CategoryRequest category,[Required][FromRoute] int id)
+        public async Task<IActionResult> UpdateCategory([Required][FromBody] CategoryRequest category,[Required][FromRoute] int id)
         {
-            var cat = _categoryRepository.GetCategory(id);
+            var cat = await _categoryRepository.GetCategory(id);
             if (cat != null)
             {
                 cat.TipoCategoria = category.TipoCategoria;

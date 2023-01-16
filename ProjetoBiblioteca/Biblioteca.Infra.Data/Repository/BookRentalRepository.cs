@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -51,14 +52,14 @@ namespace Biblioteca.Infra.Data.Repository
             return true;
         }
 
-        public BookRental GetRental(int id)
+        public async Task<BookRental> GetRental(int id)
         {
-            return _context.BooksRents.Include(x => x.Cliente).Include(x => x.Livro).ThenInclude(x => x.Autor).Include(x => x.Livro).ThenInclude(x => x.Categoria).FirstOrDefault(x => x.ClienteId == id);
+            return  await _context.BooksRents.Include(x => x.Cliente).Include(x => x.Livro).ThenInclude(x => x.Autor).Include(x => x.Livro).ThenInclude(x => x.Categoria).FirstOrDefaultAsync(x => x.ClienteId == id);
         }
 
-        public IEnumerable<BookRental> GetRents()
+        public IEnumerable<BookRental> GetRents(PageParameters parametros)
         {
-            return _context.BooksRents.ToList();
+            return _context.BooksRents.OrderBy(x => x.ValorAluguel).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToList();
         }
 
         public void UpdateRental(BookRental book)
@@ -74,6 +75,15 @@ namespace Biblioteca.Infra.Data.Repository
                 return true;
             }
             return false;
+        }
+        public decimal ExistValueClient(int id)
+        {
+            var book = _context.Clients.FirstOrDefault(x => x.Id == id);
+            if(book.SaldoDevedor > 0)
+            {
+                return book.SaldoDevedor;
+            }
+            return 0;
         }
     }
 }

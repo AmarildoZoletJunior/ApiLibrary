@@ -12,7 +12,6 @@ namespace Biblioteca.Domain.DTO.Request
 {
     public class BookRentalRequest
     {
-        public int Id { get; set; }
         public DateTime DataSaida { get; set; }
         public DateTime DataEstimadaVolta { get; set; }
         public decimal ValorAluguel { get; set; }
@@ -35,9 +34,16 @@ namespace Biblioteca.Domain.DTO.Request
 
             var busca = bookRental.GetClientBookRental(this.ClienteId);
 
-            if(busca != null)
+            if(busca)
             {
               return  Result.Failure("Este cliente ja tem um livro alugado");
+            }
+            return Result.OK();
+
+            var verificarSaldo = bookRental.ExistValueClient(this.ClienteId);
+            if(verificarSaldo > 0)
+            {
+                return Result.Failure($"Este cliente não pode alugar um livro pois tem saldo devedor em aberto. Saldo: R${verificarSaldo}");
             }
             return Result.OK();
         }

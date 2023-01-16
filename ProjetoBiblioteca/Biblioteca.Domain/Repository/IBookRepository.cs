@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Biblioteca.Domain.Repository
 {
     public interface IBookRepository
     {
-        public IEnumerable<Book> GetBooks();
+        public IEnumerable<Book> GetBooks(PageParameters parametros);
         public void AddBook(Book book);
-        public void DeleteBook(int id);
+        public void DeleteBookAsync(int id);
         public void UpdateBook(Book book);
-        public Book GetBook(int id);
+        public Task<Book> GetBook(int id);
 
     }
 }

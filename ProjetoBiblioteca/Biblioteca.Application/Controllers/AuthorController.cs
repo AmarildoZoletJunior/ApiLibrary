@@ -2,6 +2,7 @@
 using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +27,9 @@ namespace Biblioteca.Application.Controllers
 
         [HttpGet]
         [Route("GetAuthors")]
-        public IActionResult GetAuthors()
+        public IActionResult GetAuthors([FromQuery] PageParameters parameters)
         {
-            var autores = _authorRepository.GetAuthors();
+            var autores = _authorRepository.GetAuthors(parameters);
             var mapeado = Mapper.Map<List<AuthorDTO>>(autores);
             if (mapeado.Any())
             {
@@ -79,10 +80,10 @@ namespace Biblioteca.Application.Controllers
 
         [HttpPut]
         [Route("UpdateAuthor/{id}")]
-        public IActionResult UpdateAuthor([Required][FromBody] AuthorRequest author, [Required][FromRoute] int id)
+        public async Task<IActionResult> UpdateAuthorAsync([Required][FromBody] AuthorRequest author, [Required][FromRoute] int id)
         {
             var mapeado = Mapper.Map<Author>(author);
-            var aut = _authorRepository.GetAuthorSolo(id);
+            var aut = await _authorRepository.GetAuthorSolo(id);
             if(aut != null)
             {
                 aut.Nome = author.Nome;

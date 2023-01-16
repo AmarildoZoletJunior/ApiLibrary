@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using static System.Reflection.Metadata.BlobBuilder;
 using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.DTO.Request;
+using Biblioteca.Domain.Pagination;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -26,9 +27,9 @@ namespace Biblioteca.Application.Controllers
         }
         [HttpGet]
         [Route("GetBooks")]
-        public IActionResult GetBooks()
+        public IActionResult GetBooks([FromQuery] PageParameters parameters)
         {
-            var books = _bookRepository.GetBooks();
+            var books = _bookRepository.GetBooks(parameters);
 
             if (books.Any())
             {
@@ -58,7 +59,7 @@ namespace Biblioteca.Application.Controllers
             var autor = _bookRepository.GetBook(id);
             if (autor != null)
             {
-                _bookRepository.DeleteBook(id);
+                _bookRepository.DeleteBookAsync(id);
                 return Ok();
             }
             return BadRequest();
@@ -84,10 +85,10 @@ namespace Biblioteca.Application.Controllers
         
         [HttpPut]
         [Route("UpdateBook/{id}")]
-        public IActionResult UpdateBook([Required][FromBody]BookRequest book,[Required][FromRoute] int id)
+        public async Task<IActionResult> UpdateBook([Required][FromBody]BookRequest book,[Required][FromRoute] int id)
         {
             var mapeamento = Mapper.Map<Book>(book);
-            var unicBook = _bookRepository.GetBook(id);
+            var unicBook = await  _bookRepository.GetBook(id);
             if (unicBook != null)
             {
                 unicBook.DataLancamento = book.DataLancamento;

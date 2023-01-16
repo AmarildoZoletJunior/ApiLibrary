@@ -2,6 +2,7 @@
 using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,9 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllRental()
+        public IActionResult GetAllRental([FromQuery] PageParameters parameters)
         {
-            var alugueis = _bookRentalRepository.GetRents();
+            var alugueis = _bookRentalRepository.GetRents(parameters);
             if (alugueis.Any())
             {
                 var mapeado = Mapper.Map<List<BookRentalDTO>>(alugueis);
@@ -63,7 +64,7 @@ namespace Biblioteca.Application.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public IActionResult RemoveRental([Required][FromRoute] int id)
         {
             var rental = _bookRentalRepository.GetRental(id);
@@ -76,10 +77,10 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateRental([Required][FromBody] BookRentalRequest request,int id)
+        public async Task<IActionResult> UpdateRentalAsync([Required][FromBody] BookRentalRequest request,int id)
         {
             var mapeamento = Mapper.Map<BookRental>(request);
-            var unicBook = _bookRentalRepository.GetRental(id);
+            var unicBook = await _bookRentalRepository.GetRental(id);
             if (unicBook != null)
             {
                 unicBook.DataEstimadaVolta = request.DataEstimadaVolta;
