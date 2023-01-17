@@ -10,10 +10,10 @@ namespace Biblioteca.Domain.Repository
 {
     public interface IStockRepository
     {
-        public Task<IEnumerable<Stock>> GetBookStock(PageParameters parametros);
+        public Task<IEnumerable<Stock>> GetBooksStock(PageParameters parametros);
         public void AddBookStock(Stock stock);
         public Task DeleteStockAsync(int id);
         public Task UpdateStockQuantity(Stock stock);
-        public Task<Stock> GetStock(int id);
+        public Task<Stock> GetStock(int ISBN);
     }
 }

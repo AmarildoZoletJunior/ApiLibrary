@@ -27,6 +27,7 @@ builder.Services.AddTransient<IValidator<AuthorRequest>, AuthorValidation>();
 builder.Services.AddTransient<IValidator<BookRequest>, BookValidation>();
 builder.Services.AddTransient<IValidator<CategoryRequest>, CategoryValidation>();
 builder.Services.AddTransient<IValidator<BookRentalRequest>, BookRentalValidation>();
+builder.Services.AddTransient<IValidator<StockRequest>, StockValidation>();
 
 #endregion
 
@@ -43,6 +44,7 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookRentalRepository, BookRentalRepository>();
 builder.Services.AddScoped<IValidationExist, ValidationExist>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 #endregion
 

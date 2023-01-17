@@ -45,6 +45,7 @@ namespace Biblioteca.Domain.DTO.Request
             {
                 return Result.Failure($"Este cliente não pode alugar um livro pois tem saldo devedor em aberto. Saldo: R${verificarSaldo}");
             }
+            
             return Result.OK();
         }
     }

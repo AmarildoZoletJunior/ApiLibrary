@@ -1,15 +1,14 @@
-﻿using Biblioteca.Domain.Entities.Base;
+﻿using Biblioteca.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblioteca.Domain.Entities
+namespace Biblioteca.Domain.DTO
 {
-    public class Stock : BaseEntity
+    public class StockDTO
     {
-        public Book Livro { get; set; }
         public int QuantidadeTotal { get; set; }
         public int QuantidadeDisponivel { get; set; }
         public int IdLivro { get; set; }
