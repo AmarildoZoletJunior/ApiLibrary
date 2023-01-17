@@ -9,6 +9,8 @@ using static System.Reflection.Metadata.BlobBuilder;
 using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.Pagination;
+using Biblioteca.Services.RepositoryApplication;
+using Biblioteca.Domain.Exceptions;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -19,11 +21,13 @@ namespace Biblioteca.Application.Controllers
         private readonly IBookRepository _bookRepository;
         public IMapper Mapper;
         private readonly IValidationExist _exist;
-        public BookController(IBookRepository bookRepository,IValidationExist exist, IMapper mapper)
+        private readonly IBookApplication _IBookApplication;
+        public BookController(IBookRepository bookRepository,IBookApplication bookApp,IValidationExist exist, IMapper mapper)
         {
             _bookRepository = bookRepository;
             Mapper = mapper;
             _exist = exist;
+            _IBookApplication = bookApp;
         }
         [HttpGet]
         [Route("GetBooks")]
@@ -53,52 +57,40 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteBook/{id}")]
-        public async Task<IActionResult> DeleteBookAsync([Required][FromRoute] int id)
+        [Route("DeleteBook/{Isbn}")]
+        public async Task<IActionResult> DeleteBookAsync([Required][FromRoute] int Isbn)
         {
-            var autor = await _bookRepository.GetBook(id);
-            if (autor != null)
+            var book = await _bookRepository.GetBook(Isbn);
+            if (book != null)
             {
-                await _bookRepository.DeleteBookAsync(id);
+                await _bookRepository.DeleteBookAsync(Isbn);
                 return Ok();
             }
-            return BadRequest();
+            return BadRequest("Não foi encontrado o livro para ser deletado");
         }
 
         [HttpPost]
         [Route("AddBook")]
-        public IActionResult AddBook([Required][FromBody] BookRequest bookR)
+        public async Task<IActionResult> AddBookAsync([Required][FromBody] BookRequest bookR)
         {
-            if (bookR == null)
+           var add = await _IBookApplication.ValidateAddAsync(bookR);
+            if (add.Ok)
             {
-                return BadRequest();
+                return Ok(bookR);
             }
-            var validacao = bookR.ValidarBook(_exist,_bookRepository);
-            if (!validacao.Ok)
-            {
-                return BadRequest(validacao.ErrorMensagem);
-            }
-            Book book = new Book { DataLancamento = bookR.DataLancamento, Nome = bookR.Nome, CategoriaId = bookR.CategoriaId, AutorId = bookR.AutorId, QuantidadePagina = bookR.QuantidadePagina };
-            _bookRepository.AddBook(book);
-            return Ok(bookR);
+            return BadRequest(add.ErrorMensagem);
         }
         
         [HttpPut]
-        [Route("UpdateBook/{id}")]
-        public async Task<IActionResult> UpdateBook([Required][FromBody]BookRequest book,[Required][FromRoute] int id)
+        [Route("UpdateBook")]
+        public async Task<IActionResult> UpdateBook([Required][FromBody]BookRequest book)
         {
-            var unicBook = await  _bookRepository.GetBook(id);
-            if (unicBook != null)
+            var add = await _IBookApplication.ValidateAddAsync(book);
+            if (add.Ok)
             {
-                unicBook.DataLancamento = book.DataLancamento;
-                unicBook.QuantidadePagina = book.QuantidadePagina;
-                unicBook.AutorId = book.AutorId;
-                unicBook.Nome = book.Nome;
-                unicBook.CategoriaId = book.CategoriaId;
-                await _bookRepository.UpdateBook(unicBook);
-                return Ok(unicBook);
+                return Ok(book);
             }
-            return BadRequest();
+            return BadRequest(add.ErrorMensagem);
         }
     }
 }

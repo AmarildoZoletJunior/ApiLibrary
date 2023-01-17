@@ -17,36 +17,5 @@ namespace Biblioteca.Domain.DTO.Request
         public int AutorId { get; set; }
         public int CategoriaId { get; set; }
         public int ISBN { get; set; }
-        public Result ValidarBook(IValidationExist exist, IBookRepository book)
-        {
-            if(!VerificarAutor(exist))
-            {
-                return Result.Failure("Este autor não existe.");
-            }
-
-            if (!VerificarCategoria(exist))
-            {
-                return Result.Failure("Esta categoria não existe.");
-            }
-            return Result.OK();
-        }
-        public bool VerificarAutor(IValidationExist exist)
-        {
-            var AutorExist = exist.AuthorExist(this.AutorId);
-            if (!AutorExist)
-            {
-                return false;
-            }
-            return true;
-        }
-        public bool VerificarCategoria(IValidationExist exist)
-        {
-            var CategoriaExist = exist.CategoryExist(this.CategoriaId);
-            if (!CategoriaExist)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }

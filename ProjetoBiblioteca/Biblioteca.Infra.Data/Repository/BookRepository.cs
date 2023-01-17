@@ -24,16 +24,16 @@ namespace Biblioteca.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public async Task DeleteBookAsync(int id)
+        public async Task DeleteBookAsync(int Isbn)
         {
-            var book = await GetBook(id);
+            var book = await GetBook(Isbn);
             _context.Books.Remove(book);
            await _context.SaveChangesAsync();
         }
 
-        public async Task<Book> GetBook(int id)
+        public async Task<Book> GetBook(int ISBN)
         {
-            return await _context.Books.Include(X => X.Autor).Include(X => X.Categoria).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Books.Include(X => X.Autor).Include(X => X.Categoria).AsNoTracking().FirstOrDefaultAsync(a => a.ISBN == ISBN);
         }
 
         public async Task<IEnumerable<Book>> GetBooks(PageParameters parametros)

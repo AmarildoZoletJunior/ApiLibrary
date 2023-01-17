@@ -12,9 +12,9 @@ namespace Biblioteca.Domain.Repository
     {
         public Task<IEnumerable<Book>> GetBooks(PageParameters parametros);
         public void AddBook(Book book);
-        public Task DeleteBookAsync(int id);
+        public Task DeleteBookAsync(int Isbn);
         public Task UpdateBook(Book book);
-        public Task<Book> GetBook(int id);
+        public Task<Book> GetBook(int ISBN);
 
     }
 }

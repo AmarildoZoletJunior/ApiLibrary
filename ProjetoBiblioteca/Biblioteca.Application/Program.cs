@@ -6,6 +6,8 @@ using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Context;
 using Biblioteca.Infra.Data.Repository;
+using Biblioteca.Services.Applications;
+using Biblioteca.Services.RepositoryApplication;
 using Biblioteca.Services.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -45,6 +47,8 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookRentalRepository, BookRentalRepository>();
 builder.Services.AddScoped<IValidationExist, ValidationExist>();
 builder.Services.AddScoped<IStockRepository, StockRepository>();
+
+builder.Services.AddScoped<IBookApplication, BookApplication>();
 
 #endregion
 

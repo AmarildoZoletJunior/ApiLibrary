@@ -16,6 +16,8 @@ namespace Biblioteca.Services.Validators
                 .NotEmpty().WithName("TipoCategoria").WithMessage("O campo TipoCategoria não pode ser vazio.")
                 .NotNull().WithName("TipoCategoria").WithMessage("O campo TipoCategoria não pode ser nulo.")
                 .MinimumLength(3).WithName("TipoCategoria").WithMessage("O campo TipoCategoria não pode conter menos de 3 caracteres.");
+
+
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet]
-        [Route("GetAuthors")]
+        [Route("All")]
         public async Task<IActionResult> GetAuthorsAsync([FromQuery] PageParameters parameters)
         {
             var autores = await _authorRepository.GetAuthors(parameters);
@@ -40,7 +40,7 @@ namespace Biblioteca.Application.Controllers
 
 
         [HttpGet]
-        [Route("GetAuthor/{id}")]
+        [Route("/{id}")]
         public async Task<IActionResult> GetAuthorAsync([Required][FromRoute] int id)
         {
             var autor = await _authorRepository.GetAuthor(id);

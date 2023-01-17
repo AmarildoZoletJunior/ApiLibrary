@@ -29,7 +29,6 @@ namespace Biblioteca.Services.Validators
             RuleFor(x => x.CategoriaId)
                  .NotEmpty().WithName("CategoriaId").WithMessage("O campo CategoriaId não pode ser vazio.")
                 .NotNull().WithName("CategoriaId").WithMessage("O campo CategoriaId não pode ser nulo.");
-
         }
     }
 }

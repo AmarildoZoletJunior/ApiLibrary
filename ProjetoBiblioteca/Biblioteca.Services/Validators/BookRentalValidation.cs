@@ -28,6 +28,7 @@ namespace Biblioteca.Services.Validators
                 .NotNull().WithName("ValorAluguel").WithMessage("O campo ValorAluguel não pode ser nulo.");
 
             RuleFor(x => x.DataEstimadaVolta).GreaterThan(x => x.DataSaida).WithMessage("A data de saida não pode ser menor que a data de retorno.");
+
         }
     }
 }
