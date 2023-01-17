@@ -24,5 +24,8 @@ namespace Biblioteca.Domain.Entities
         [JsonIgnore]
         public BookRental Aluguel { get; set; }
         //Relacionamento com estoque
+        [JsonIgnore]
+        public Stock Estoque { get; set; }
+        public int ISBN { get; set; }
     }
 }

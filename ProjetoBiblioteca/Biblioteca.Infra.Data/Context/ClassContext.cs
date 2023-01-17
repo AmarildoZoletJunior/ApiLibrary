@@ -20,6 +20,7 @@ namespace Biblioteca.Infra.Data.Context
         public DbSet<Client> Clients { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookRental> BooksRents { get; set; }
+        public DbSet<Stock> Estoque { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuthorMapping());
@@ -27,6 +28,7 @@ namespace Biblioteca.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new CategoryMapping());
             modelBuilder.ApplyConfiguration(new ClientMapping());
             modelBuilder.ApplyConfiguration(new BookRentalMapping());
+            modelBuilder.ApplyConfiguration(new StockMapping());
         }
     }
 }
