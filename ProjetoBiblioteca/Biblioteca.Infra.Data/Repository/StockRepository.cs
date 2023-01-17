@@ -29,7 +29,7 @@ namespace Biblioteca.Infra.Data.Repository
 
         public async Task<IEnumerable<Stock>> GetBooksStock(PageParameters parametros)
         {
-            return await _classContext.Estoque.OrderBy(x => x.Id).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
+            return await _classContext.Estoque.Include(x => x.Livro).OrderBy(x => x.Id).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();
         }
 
         public async Task<Stock> GetStock(int ISBN)

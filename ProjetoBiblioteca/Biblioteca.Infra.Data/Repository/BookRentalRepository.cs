@@ -19,9 +19,11 @@ namespace Biblioteca.Infra.Data.Repository
         {
             _context = context;
         }
-        public void AddRental(BookRental book)
+        public async Task AddRentalAsync(BookRental book)
         {
             _context.BooksRents.Add(book);
+            var livroAlugar = await _context.Estoque.Include(x => x.Livro).FirstOrDefaultAsync(x => x.Livro.Id == book.Id);
+            livroAlugar.QuantidadeDisponivel += -1;
             _context.SaveChanges();
         }
 
@@ -84,6 +86,15 @@ namespace Biblioteca.Infra.Data.Repository
                 return book.SaldoDevedor;
             }
             return 0;
+        }
+        public bool ExistBookAvailable(int id)
+        {
+            var book = _context.Estoque.Include(x => x.Livro).FirstOrDefault(x => x.Livro.Id == id);
+            if(book.QuantidadeDisponivel == 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

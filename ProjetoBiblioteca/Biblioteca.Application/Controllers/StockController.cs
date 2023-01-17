@@ -29,7 +29,8 @@ namespace Biblioteca.Application.Controllers
             var busca = await _stockRepository.GetBooksStock(parameter);
             if (busca.Any())
             {
-                return Ok(busca);
+                var mapeado = Mapper.Map<List<StockDTO>>(busca);
+                return Ok(mapeado);
             }
             return BadRequest("Nenhum item no estoque foi encontrado");
         }
@@ -73,5 +74,7 @@ namespace Biblioteca.Application.Controllers
             }
             return BadRequest();
         }
+
+
     }
 }

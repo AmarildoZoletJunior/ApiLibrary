@@ -59,7 +59,7 @@ namespace Biblioteca.Application.Controllers
                 return Ok(validacao.ErrorMensagem);
             }
             var mapeado = Mapper.Map<BookRental>(request);
-            _bookRentalRepository.AddRental(mapeado);
+            _bookRentalRepository.AddRentalAsync(mapeado);
             return Ok(mapeado);
         }
 
