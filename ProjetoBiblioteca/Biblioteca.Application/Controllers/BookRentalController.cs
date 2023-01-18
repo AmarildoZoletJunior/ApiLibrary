@@ -5,6 +5,7 @@ using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Repository;
+using Biblioteca.Services.RepositoryApplication;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,15 +18,18 @@ namespace Biblioteca.Application.Controllers
         private readonly IBookRentalRepository _bookRentalRepository;
         public IMapper Mapper;
         private readonly IValidationExist _exist;
+        private readonly IBookRentalApplication App;
 
-        public BookRentalController(IBookRentalRepository bookRentalRepository,IValidationExist exist, IMapper mapper)
+        public BookRentalController(IBookRentalRepository bookRentalRepository,IBookRentalApplication app,IValidationExist exist, IMapper mapper)
         {
             _bookRentalRepository = bookRentalRepository;
             Mapper = mapper;
             _exist = exist;
+            App = app;
         }
 
         [HttpGet]
+        [Route("All")]
         public async Task<IActionResult> GetAllRentalAsync([FromQuery] PageParameters parameters)
         {
             var alugueis = await _bookRentalRepository.GetRents(parameters);
@@ -37,7 +41,8 @@ namespace Biblioteca.Application.Controllers
             return BadRequest("Não foi encontrado nenhum aluguel cadastrado");
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> GetRentalAsync([Required][FromRoute]int id)
         {
             var aluguel = await _bookRentalRepository.GetRental(id);
@@ -51,20 +56,19 @@ namespace Biblioteca.Application.Controllers
 
 
         [HttpPost]
-        public IActionResult AddRental([Required][FromBody]BookRentalRequest request)
+        public async Task<IActionResult> AddRental([Required][FromBody]BookRentalRequest request)
         {
-            var validacao = request.ValidarAluguel(_bookRentalRepository,_exist);
-            if (!validacao.Ok) 
+            var adicionar = await App.ValidateAddAsync(request);
+            if (adicionar.Ok)
             {
-                return Ok(validacao.ErrorMensagem);
+                return Ok(request);
             }
-            var mapeado = Mapper.Map<BookRental>(request);
-            _bookRentalRepository.AddRentalAsync(mapeado);
-            return Ok(mapeado);
+            return BadRequest(adicionar.ErrorMensagem);
         }
 
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete]
+        [Route("{id}")]
         public async Task<IActionResult> RemoveRentalAsync([Required][FromRoute] int id)
         {
             var rental = await _bookRentalRepository.GetRental(id);
@@ -73,7 +77,7 @@ namespace Biblioteca.Application.Controllers
                await _bookRentalRepository.DeleteRentalAsync(id);
                 return Ok(rental);
             }
-            return NotFound();
+            return NotFound("Não foi encontrado nenhum aluguel.");
         }
 
         [HttpPut]
@@ -86,10 +90,11 @@ namespace Biblioteca.Application.Controllers
                 unicBook.DataSaida = request.DataSaida;
                 unicBook.ClienteId = request.ClienteId;
                 unicBook.LivroId = request.LivroId;
+                unicBook.ValorAluguel = request.ValorAluguel;
                await _bookRentalRepository.UpdateRentalAsync(unicBook);
                 return Ok(unicBook);
             }
-            return BadRequest();
+            return BadRequest("Aluguel não encontrado");
         }
     }
 }

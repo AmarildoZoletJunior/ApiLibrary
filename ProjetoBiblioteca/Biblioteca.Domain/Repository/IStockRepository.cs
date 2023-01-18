@@ -15,5 +15,6 @@ namespace Biblioteca.Domain.Repository
         public Task DeleteStockAsync(int id);
         public Task UpdateStockQuantity(Stock stock);
         public Task<Stock> GetStock(int ISBN);
+        public Task<Book> GetBookForAdd(int ISBN);
     }
 }

@@ -23,7 +23,7 @@ namespace Biblioteca.Domain.Entities
         public int  CategoriaId { get; set; }
 
         [JsonIgnore]
-        public BookRental Aluguel { get; set; }
+        public List<BookRental> Aluguel { get; set; }
 
         [JsonIgnore]
         public Stock Estoque { get; set; }

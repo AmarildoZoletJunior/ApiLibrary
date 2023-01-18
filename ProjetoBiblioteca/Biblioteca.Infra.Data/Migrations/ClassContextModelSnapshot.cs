@@ -103,8 +103,7 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.HasIndex("ClienteId")
                         .IsUnique();
 
-                    b.HasIndex("LivroId")
-                        .IsUnique();
+                    b.HasIndex("LivroId");
 
                     b.ToTable("BooksRents");
                 });
@@ -163,7 +162,6 @@ namespace Biblioteca.Infra.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdLivro")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("QuantidadeDisponivel")
@@ -208,8 +206,8 @@ namespace Biblioteca.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Biblioteca.Domain.Entities.Book", "Livro")
-                        .WithOne("Aluguel")
-                        .HasForeignKey("Biblioteca.Domain.Entities.BookRental", "LivroId")
+                        .WithMany("Aluguel")
+                        .HasForeignKey("LivroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -236,8 +234,7 @@ namespace Biblioteca.Infra.Data.Migrations
 
             modelBuilder.Entity("Biblioteca.Domain.Entities.Book", b =>
                 {
-                    b.Navigation("Aluguel")
-                        .IsRequired();
+                    b.Navigation("Aluguel");
 
                     b.Navigation("Estoque")
                         .IsRequired();

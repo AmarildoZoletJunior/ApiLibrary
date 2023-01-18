@@ -49,6 +49,8 @@ builder.Services.AddScoped<IValidationExist, ValidationExist>();
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 builder.Services.AddScoped<IBookApplication, BookApplication>();
+builder.Services.AddScoped<IClientApplication, ClientApplication>();
+builder.Services.AddScoped<IBookRentalApplication, BookRentalApplication>();
 
 #endregion
 

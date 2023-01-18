@@ -7,6 +7,7 @@ using Biblioteca.Domain.Exceptions;
 using Biblioteca.Domain.DTO.Request;
 using Biblioteca.Domain.DTO;
 using Biblioteca.Domain.Pagination;
+using Biblioteca.Services.RepositoryApplication;
 
 namespace Biblioteca.Application.Controllers
 {
@@ -17,15 +18,17 @@ namespace Biblioteca.Application.Controllers
         private readonly IClientRepository _clientRepository;
         public IMapper Mapper;
         private readonly IValidationExist _exist;
-        public ClientController(IClientRepository clientRepository,IValidationExist exist, IMapper mapper)
+        private readonly IClientApplication _clientApplication;
+        public ClientController(IClientRepository clientRepository,IClientApplication app,IValidationExist exist, IMapper mapper)
         {
             _clientRepository = clientRepository;
             Mapper = mapper;
             _exist = exist;
+            _clientApplication = app;
         }
 
         [HttpGet]
-        [Route("GetClients")]
+        [Route("All")]
         public async Task<IActionResult> GetClientsAsync([FromQuery] PageParameters parameters)
         {
             var clients = await _clientRepository.GetClients(parameters);
@@ -38,11 +41,10 @@ namespace Biblioteca.Application.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetClient/{id}")]
-        public async Task<IActionResult> GetClientAsync([Required][FromRoute] int id)
+        [HttpGet("{cpf}")]
+        public async Task<IActionResult> GetClientAsync([Required][FromRoute] string cpf)
         {
-            var client = await _clientRepository.GetClient(id);
+            var client = await _clientRepository.GetClient(cpf);
             if (client != null)
             {
                 return Ok(client);
@@ -50,51 +52,38 @@ namespace Biblioteca.Application.Controllers
             return BadRequest("Não foi encontrado nenhum cliente");
         }
 
-        [HttpDelete]
-        [Route("DeleteClient/{id}")]
-        public async Task<IActionResult> DeleteClient([Required][FromRoute] int id)
+        [HttpDelete("{cpf}")]
+        public async Task<IActionResult> DeleteClient([Required][FromRoute] string cpf)
         {
-            var client = await _clientRepository.GetClient(id);
+            var client = await _clientRepository.GetClient(cpf);
             if (client != null)
             {
-                await _clientRepository.DeleteClientAsync(id);
+                await _clientRepository.DeleteClientAsync(cpf);
                 return Ok(client);
             }
             return BadRequest("Não foi possivel deletar");
         }
 
         [HttpPost]
-        [Route("AddClient")]
         public IActionResult AddClient([Required][FromBody] ClientRequest Client)
         {
-            var validacao = Client.ValidateCpf(_clientRepository);
-            if (!validacao.Ok)
+            var validacao = _clientApplication.ValidateCpfAdd(Client);
+            if (validacao.Ok)
             {
-                return BadRequest(validacao.ErrorMensagem);
+                return Ok(Client);
             }
-                Client client = new Client { Email = Client.Email, CPF = Client.CPF, Nome = Client.Nome };
-                if (client != null)
-                {
-                    _clientRepository.AddClient(client);
-                    return Ok(Client);
-                }
-               return BadRequest();
+            return BadRequest(validacao.ErrorMensagem);
         }
 
         [HttpPut]
-        [Route("UpdateClient")]
-        public async Task<IActionResult> UpdateClientAsync([Required][FromBody] ClientRequest Client,int id)
+        public async Task<IActionResult> UpdateClientAsync([Required][FromBody] ClientRequest Client)
         {
-            var mapeamento = Mapper.Map<Client>(Client);
-            var client = await _clientRepository.GetClient(id);
-            if (client != null)
+            var exec = await _clientApplication.UpdateClientAsync(Client);
+            if (exec.Ok)
             {
-                client.Nome = mapeamento.Nome;
-                client.Email = mapeamento.Email;
-                await _clientRepository.UpdateClient(client);
-                return Ok(client);
+                return Ok(Client);
             }
-            return BadRequest();
+            return BadRequest(exec.ErrorMensagem);
         }
     }
 }

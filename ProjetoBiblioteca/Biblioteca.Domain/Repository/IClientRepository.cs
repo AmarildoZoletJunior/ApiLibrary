@@ -12,9 +12,9 @@ namespace Biblioteca.Domain.Repository
     {
         public Task<IEnumerable<Client>> GetClients(PageParameters parametros);
         public void AddClient(Client client);
-        public Task DeleteClientAsync(int id);
+        public Task DeleteClientAsync(string cpf);
         public Task UpdateClient(Client client);
-        public Task<Client> GetClient(int id);
+        public Task<Client> GetClient(string cpf);
         public bool GetCpf(string cpf);
     }
 }

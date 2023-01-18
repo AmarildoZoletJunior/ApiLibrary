@@ -13,23 +13,7 @@ namespace Biblioteca.Domain.DTO.Request
         public string CPF { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public Result ValidateCpf(IClientRepository repository)
-        {
-            if (!VerificarCPF(repository))
-            {
-                return Result.Failure("Este cpf ja foi cadastrado");
-            }
-            return Result.OK();
-        }
-        public bool VerificarCPF(IClientRepository repository)
-        {
-            var resultado = repository.GetCpf(CPF);
-            if (resultado)
-            {
-                return false;
-            }
-            return true;
-        }
+
 
     }
 }

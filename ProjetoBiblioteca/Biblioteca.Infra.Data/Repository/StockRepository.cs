@@ -27,6 +27,11 @@ namespace Biblioteca.Infra.Data.Repository
            await _classContext.SaveChangesAsync();
         }
 
+        public async Task<Book> GetBookForAdd(int ISBN)
+        {
+           return await _classContext.Books.FirstOrDefaultAsync(x => x.ISBN == ISBN);
+        }
+
         public async Task<IEnumerable<Stock>> GetBooksStock(PageParameters parametros)
         {
             return await _classContext.Estoque.Include(x => x.Livro).OrderBy(x => x.Id).Skip((parametros.PageNumber - 1) * parametros.PageSize).Take(parametros.PageSize).ToListAsync();

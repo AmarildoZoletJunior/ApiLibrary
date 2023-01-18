@@ -30,7 +30,7 @@ namespace Biblioteca.Application.Controllers
             _IBookApplication = bookApp;
         }
         [HttpGet]
-        [Route("GetBooks")]
+        [Route("All")]
         public async Task<IActionResult> GetBooksAsync([FromQuery] PageParameters parameters)
         {
             var books = await _bookRepository.GetBooks(parameters);
@@ -44,10 +44,10 @@ namespace Biblioteca.Application.Controllers
 
 
         [HttpGet]
-        [Route("GetBook/{id}")]
-        public async Task<IActionResult> GetBookAsync([Required][FromRoute] int id)
+        [Route("{isbn}")]
+        public async Task<IActionResult> GetBookAsync([Required][FromRoute] int isbn)
         {
-            var bookUnic = await _bookRepository.GetBook(id);
+            var bookUnic = await _bookRepository.GetBook(isbn);
             if (bookUnic != null)
             {
                 var mapeado = Mapper.Map<BookDTO>(bookUnic);
@@ -57,7 +57,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteBook/{Isbn}")]
+        [Route("{Isbn}")]
         public async Task<IActionResult> DeleteBookAsync([Required][FromRoute] int Isbn)
         {
             var book = await _bookRepository.GetBook(Isbn);
@@ -70,7 +70,6 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPost]
-        [Route("AddBook")]
         public async Task<IActionResult> AddBookAsync([Required][FromBody] BookRequest bookR)
         {
            var add = await _IBookApplication.ValidateAddAsync(bookR);
@@ -82,7 +81,6 @@ namespace Biblioteca.Application.Controllers
         }
         
         [HttpPut]
-        [Route("UpdateBook")]
         public async Task<IActionResult> UpdateBook([Required][FromBody]BookRequest book)
         {
             var add = await _IBookApplication.ValidateAddAsync(book);

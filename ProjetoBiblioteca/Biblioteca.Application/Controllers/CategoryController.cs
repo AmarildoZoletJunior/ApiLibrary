@@ -24,7 +24,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet]
-        [Route("GetCategories")]
+        [Route("All")]
         public async Task<IActionResult> GetCategoriesAsync([FromQuery] PageParameters parameters)
         {
             var categories =  await _categoryRepository.GetCategories(parameters);
@@ -38,7 +38,7 @@ namespace Biblioteca.Application.Controllers
 
 
         [HttpGet]
-        [Route("GetCategory/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetCategoryAsync([Required][FromRoute] int id)
         {
             var cat = await _categoryRepository.GetCategory(id);
@@ -51,7 +51,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteCategory/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteCategoryAsync([Required][FromRoute] int id)
         {
             var cat = await _categoryRepository.GetCategory(id);
@@ -64,7 +64,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPost]
-        [Route("AddCategory")]
+        
         public IActionResult AddCategory([Required][FromBody]CategoryRequest category)
         {
             Category cat = new Category { TipoCategoria = category.TipoCategoria};
@@ -77,7 +77,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateCategory/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> UpdateCategory([Required][FromBody] CategoryRequest category,[Required][FromRoute] int id)
         {
             var cat = await _categoryRepository.GetCategory(id);

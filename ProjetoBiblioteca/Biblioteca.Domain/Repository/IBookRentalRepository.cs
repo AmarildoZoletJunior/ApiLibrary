@@ -17,6 +17,7 @@ namespace Biblioteca.Domain.Repository
         public Task<BookRental> GetRental(int id);
         public bool GetClientBookRental(int id);
         public decimal ExistValueClient(int id);
-        public bool ExistBookAvailable(int ISNB);
+        public bool ExistBookAvailableAsync(int id);
+        public bool ExistStock(int id);
     }
 }

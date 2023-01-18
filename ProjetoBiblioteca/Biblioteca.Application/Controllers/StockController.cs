@@ -23,7 +23,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet]
-        [Route("GetStocks")]
+        [Route("All")]
         public async Task<IActionResult> GetStockAll([FromQuery]PageParameters parameter)
         {
             var busca = await _stockRepository.GetBooksStock(parameter);
@@ -36,7 +36,7 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpGet]
-        [Route("GetStock/{isbn}")]
+        [Route("{isbn}")]
         public async Task<IActionResult> GetStock([FromRoute] int isbn)
         {
             var busca = await _stockRepository.GetStock(isbn);
@@ -53,22 +53,23 @@ namespace Biblioteca.Application.Controllers
             var pesquisar = await _stockRepository.GetStock(request.ISBN);
             if (pesquisar != null)
             {
-                await UpdateStock(request, request.ISBN);
+                await UpdateStock(request);
                 return Ok("Livro ja cadastrado, Foram atualiazadas as quantidades");
             }
-            var mapeado = Mapper.Map<Stock>(request);
-            _stockRepository.AddBookStock(mapeado);
-            return Ok(request);
+            var bookPesquisa = await _stockRepository.GetBookForAdd(request.ISBN);
+            var novo = new Stock { IdLivro = bookPesquisa.Id, QuantidadeDisponivel = request.QuantidadeDisponivel, QuantidadeTotal = request.QuantidadeTotal };
+            _stockRepository.AddBookStock(novo);
+            return Ok(novo);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateStock(StockRequest request,int ISBN)
+        public async Task<IActionResult> UpdateStock(StockRequest request)
         {
-            var stock = await _stockRepository.GetStock(ISBN);
+            var stock = await _stockRepository.GetStock(request.ISBN);
             if (stock != null)
             {
-                stock.QuantidadeTotal += request.QuantidadeTotal;
-                stock.QuantidadeDisponivel += request.QuantidadeTotal;
+                stock.QuantidadeTotal = request.QuantidadeTotal;
+                stock.QuantidadeDisponivel = request.QuantidadeTotal;
                 await _stockRepository.UpdateStockQuantity(stock);
                 return Ok(stock);
             }

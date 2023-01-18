@@ -16,7 +16,7 @@ namespace Biblioteca.Infra.Data.Mapping
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.Livro).WithOne(x => x.Estoque).HasForeignKey<Stock>(x => x.IdLivro);
             builder.Property(x => x.QuantidadeDisponivel).IsRequired();
-            builder.Property(x => x.IdLivro).ValueGeneratedOnAdd();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.QuantidadeTotal).IsRequired();
         }
     }

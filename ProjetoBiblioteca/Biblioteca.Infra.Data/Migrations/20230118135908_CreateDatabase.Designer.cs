@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Infra.Data.Migrations
 {
     [DbContext(typeof(ClassContext))]
-    [Migration("20230113141016_CreateDatabase")]
+    [Migration("20230118135908_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -58,6 +58,9 @@ namespace Biblioteca.Infra.Data.Migrations
 
                     b.Property<DateTime>("DataLancamento")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ISBN")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -154,6 +157,31 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("Biblioteca.Domain.Entities.Stock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IdLivro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeDisponivel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeTotal")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdLivro")
+                        .IsUnique();
+
+                    b.ToTable("Estoque");
+                });
+
             modelBuilder.Entity("Biblioteca.Domain.Entities.Book", b =>
                 {
                     b.HasOne("Biblioteca.Domain.Entities.Author", "Autor")
@@ -192,6 +220,17 @@ namespace Biblioteca.Infra.Data.Migrations
                     b.Navigation("Livro");
                 });
 
+            modelBuilder.Entity("Biblioteca.Domain.Entities.Stock", b =>
+                {
+                    b.HasOne("Biblioteca.Domain.Entities.Book", "Livro")
+                        .WithOne("Estoque")
+                        .HasForeignKey("Biblioteca.Domain.Entities.Stock", "IdLivro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Livro");
+                });
+
             modelBuilder.Entity("Biblioteca.Domain.Entities.Author", b =>
                 {
                     b.Navigation("Livros");
@@ -200,6 +239,9 @@ namespace Biblioteca.Infra.Data.Migrations
             modelBuilder.Entity("Biblioteca.Domain.Entities.Book", b =>
                 {
                     b.Navigation("Aluguel")
+                        .IsRequired();
+
+                    b.Navigation("Estoque")
                         .IsRequired();
                 });
 

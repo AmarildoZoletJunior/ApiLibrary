@@ -22,7 +22,7 @@ namespace Biblioteca.Infra.Data.Repository
         public async Task AddRentalAsync(BookRental book)
         {
             _context.BooksRents.Add(book);
-            var livroAlugar = await _context.Estoque.Include(x => x.Livro).FirstOrDefaultAsync(x => x.Livro.Id == book.Id);
+            var livroAlugar = await _context.Estoque.Include(x => x.Livro).FirstOrDefaultAsync(x => x.Livro.Id == book.LivroId);
             livroAlugar.QuantidadeDisponivel += -1;
             _context.SaveChanges();
         }
@@ -87,14 +87,28 @@ namespace Biblioteca.Infra.Data.Repository
             }
             return 0;
         }
-        public bool ExistBookAvailable(int id)
+        public bool ExistBookAvailableAsync(int id)
         {
-            var book = _context.Estoque.Include(x => x.Livro).FirstOrDefault(x => x.Livro.Id == id);
-            if(book.QuantidadeDisponivel == 0)
+            var book = _context.Estoque.FirstOrDefault(x => x.IdLivro == id);
+            if(book == null)
+            {
+                return false;
+            }
+            if(book.QuantidadeDisponivel > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool ExistStock(int id)
+        {
+            var book = _context.Estoque.FirstOrDefault(x => x.IdLivro == id);
+            if (book == null)
             {
                 return false;
             }
             return true;
         }
+
     }
 }

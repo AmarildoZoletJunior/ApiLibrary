@@ -39,8 +39,7 @@ namespace Biblioteca.Application.Controllers
         }
 
 
-        [HttpGet]
-        [Route("/{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetAuthorAsync([Required][FromRoute] int id)
         {
             var autor = await _authorRepository.GetAuthor(id);
@@ -52,8 +51,7 @@ namespace Biblioteca.Application.Controllers
             return BadRequest("Não foi encontrado nenhum autor");
         }
 
-        [HttpDelete]
-        [Route("DeleteAuthor/{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAuthorAsync([Required][FromRoute] int id)
         {
             var autor = await _authorRepository.GetAuthor(id);
@@ -62,11 +60,10 @@ namespace Biblioteca.Application.Controllers
                 await _authorRepository.DeleteAuthor(id);
                 return Ok();
             }
-            return BadRequest();
+            return BadRequest("Não foi encontrado nenhum autor");
         }
 
         [HttpPost]
-        [Route("AddAuthor")]
         public IActionResult AddAuthor([Required][FromBody]AuthorRequest author)
         {
             Author autor = new Author { Nome = author.Nome };
@@ -78,19 +75,17 @@ namespace Biblioteca.Application.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
-        [Route("UpdateAuthor/{id}")]
-        public async Task<IActionResult> UpdateAuthorAsync([Required][FromBody] AuthorRequest author, [Required][FromRoute] int id)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateAuthorAsync([Required][FromBody] AuthorRequest author,[Required][FromRoute] int id)
         {
-            var mapeado = Mapper.Map<Author>(author);
             var aut = await _authorRepository.GetAuthorSolo(id);
             if(aut != null)
             {
                 aut.Nome = author.Nome;
-                _authorRepository.UpdateAuthor(aut);
+                await _authorRepository.UpdateAuthor(aut);
                 return Ok(aut);
             }
-            return BadRequest();
+            return BadRequest("Não foi encontrado nenhum autor");
         }
     }
 }

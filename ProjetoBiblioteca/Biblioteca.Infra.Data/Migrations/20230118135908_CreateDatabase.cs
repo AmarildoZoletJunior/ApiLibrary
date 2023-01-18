@@ -63,7 +63,8 @@ namespace Biblioteca.Infra.Data.Migrations
                     DataLancamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     QuantidadePagina = table.Column<int>(type: "int", nullable: false),
                     AutorId = table.Column<int>(type: "int", nullable: false),
-                    CategoriaId = table.Column<int>(type: "int", nullable: false)
+                    CategoriaId = table.Column<int>(type: "int", nullable: false),
+                    ISBN = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,6 +112,27 @@ namespace Biblioteca.Infra.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Estoque",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuantidadeTotal = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeDisponivel = table.Column<int>(type: "int", nullable: false),
+                    IdLivro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estoque", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Estoque_Books_IdLivro",
+                        column: x => x.IdLivro,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Books_AutorId",
                 table: "Books",
@@ -132,6 +154,12 @@ namespace Biblioteca.Infra.Data.Migrations
                 table: "BooksRents",
                 column: "LivroId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Estoque_IdLivro",
+                table: "Estoque",
+                column: "IdLivro",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -141,10 +169,13 @@ namespace Biblioteca.Infra.Data.Migrations
                 name: "BooksRents");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Estoque");
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Autores");
