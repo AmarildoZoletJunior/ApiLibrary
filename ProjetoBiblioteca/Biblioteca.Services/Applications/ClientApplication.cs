@@ -18,7 +18,7 @@ namespace Biblioteca.Services.Applications
             _Validation = validation;
             mapa = map;
         }
-        public Result ValidateCpfAdd(ClientRequest request)
+        public async Task<Result> ValidateCpfAddAsync(ClientRequest request)
         {
             if (VerificarCPF(request.CPF))
             {

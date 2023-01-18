@@ -51,7 +51,7 @@ builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<IBookApplication, BookApplication>();
 builder.Services.AddScoped<IClientApplication, ClientApplication>();
 builder.Services.AddScoped<IBookRentalApplication, BookRentalApplication>();
-
+builder.Services.AddScoped<IStockApplication, StockApplication>();
 #endregion
 
 builder.Services.AddDbContext<ClassContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

@@ -59,20 +59,24 @@ namespace Biblioteca.Services.Applications
             }
             if (await VerificarExistencia(request.ISBN))
             {
-                await AtualizarBook(request);
-                return Result.OK();
+                return Result.Failure("Este livro ja esta cadastrado");
 
             }
             var mapeamento = mapa.Map<Book>(request);
             _bookRepository.AddBook(mapeamento);
             return Result.OK();
         }
-        public async Task AtualizarBook(BookRequest request)
+        public async Task<Result> AtualizarBook(BookRequest request)
         {
             var buscar = await _bookRepository.GetBook(request.ISBN);
+            if(buscar == null)
+            {
+                return Result.Failure("Este livro não foi encontrado");
+            }
             buscar.Nome = request.Nome;
             buscar.QuantidadePagina = request.QuantidadePagina;
             await _bookRepository.UpdateBook(buscar);
+            return Result.OK();
         }
     }
 }

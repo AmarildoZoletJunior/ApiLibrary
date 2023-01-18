@@ -24,35 +24,44 @@ namespace Biblioteca.Infra.Data.Repository
             return false;
         }
 
-        public bool BookExists(int id)
+        public bool BookExists(int BookId)
         {
-            var author = _context.Books.AsNoTracking().FirstOrDefault(x => x.Id == id);
-            if (author != null)
+            var book = _context.Books.AsNoTracking().FirstOrDefault(x => x.Id == BookId);
+            if (book != null)
                 return true;
             return false;
         }
 
         public bool BookRentalExist(int id)
         {
-            var author = _context.BooksRents.AsNoTracking().FirstOrDefault(x => x.Id == id);
-            if (author != null)
+            var bookRental = _context.BooksRents.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            if (bookRental != null)
                 return true;
             return false;
         }
 
         public bool CategoryExist(int id)
         {
-            var author = _context.Categories.AsNoTracking().FirstOrDefault(x => x.Id == id);
-            if (author != null)
+            var category = _context.Categories.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            if (category != null)
                 return true;
             return false;
         }
 
         public bool ClientExist(int id)
         {
-            var author = _context.Clients.AsNoTracking().FirstOrDefault(x => x.Id == id);
-            if (author != null)
+            var client = _context.Clients.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            if (client != null)
                 return true;
+            return false;
+        }
+        public bool GetStock(int ISBN)
+        {
+            var stock = _context.Estoque.Include(x => x.Livro).AsNoTracking().FirstOrDefault(x => x.Livro.ISBN == ISBN);
+            if(stock != null)
+            {
+                return true;
+            }
             return false;
         }
     }

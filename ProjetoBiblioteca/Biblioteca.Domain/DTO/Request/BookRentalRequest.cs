@@ -18,5 +18,6 @@ namespace Biblioteca.Domain.DTO.Request
         public decimal ValorAluguel { get; set; }
         public int LivroId { get; set; }
         public int ClienteId { get; set; }
+
     }
 }

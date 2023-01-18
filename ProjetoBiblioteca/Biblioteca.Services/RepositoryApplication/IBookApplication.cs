@@ -12,6 +12,7 @@ namespace Biblioteca.Services.RepositoryApplication
     public interface IBookApplication
     {
         public Task<Result> ValidateAddAsync(BookRequest request);
+        public Task<Result> AtualizarBook(BookRequest request);
         public bool VerificarCategoria(int categoriaId);
         public bool VerificarAutor(int id);
         public Task<bool> VerificarExistencia(int ISBN);

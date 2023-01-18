@@ -14,7 +14,7 @@ namespace Biblioteca.Domain.Repository
         public Task AddRentalAsync(BookRental book);
         public Task DeleteRentalAsync(int id);
         public Task UpdateRentalAsync(BookRental book);
-        public Task<BookRental> GetRental(int id);
+        public Task<BookRental> GetRental(int ClienteId);
         public bool GetClientBookRental(int id);
         public decimal ExistValueClient(int id);
         public bool ExistBookAvailableAsync(int id);

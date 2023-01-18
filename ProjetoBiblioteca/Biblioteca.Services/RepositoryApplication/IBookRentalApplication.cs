@@ -17,6 +17,7 @@ namespace Biblioteca.Services.RepositoryApplication
         public bool VerificarSaldoDevedor(int ClienteId);
         public bool VerificarDisponbilidade(int LivroId);
         public Task<Result> ValidateAddAsync(BookRentalRequest request);
+        public Task<Result> ValidateUpdateAsync(BookRentalRequest request);
 
     }
 }

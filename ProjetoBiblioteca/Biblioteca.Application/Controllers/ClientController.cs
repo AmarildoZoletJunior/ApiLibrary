@@ -65,9 +65,9 @@ namespace Biblioteca.Application.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddClient([Required][FromBody] ClientRequest Client)
+        public async Task<IActionResult> AddClientAsync([Required][FromBody] ClientRequest Client)
         {
-            var validacao = _clientApplication.ValidateCpfAdd(Client);
+            var validacao = await _clientApplication.ValidateCpfAddAsync(Client);
             if (validacao.Ok)
             {
                 return Ok(Client);

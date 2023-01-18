@@ -66,12 +66,12 @@ namespace Biblioteca.Application.Controllers
         [HttpPost]
         public IActionResult AddAuthor([Required][FromBody]AuthorRequest author)
         {
-            Author autor = new Author { Nome = author.Nome };
             if (author != null)
             {
+                Author autor = new Author { Nome = author.Nome };
                 _authorRepository.AddAuthor(autor);
                 return Ok(author);
-            }
+            }     
             return BadRequest();
         }
 

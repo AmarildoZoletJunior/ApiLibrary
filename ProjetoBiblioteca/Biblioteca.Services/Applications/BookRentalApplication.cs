@@ -103,11 +103,11 @@ namespace Biblioteca.Services.Applications
 
                 if (!VerificarSaldoDevedor(request.ClienteId))
                 {
-                    return Result.Failure($"sEste cliente não pode alugar um livro pois tem saldo devedor em aberto.");
+                    return Result.Failure($"Este cliente não pode alugar um livro pois tem saldo devedor em aberto.");
                 }
                 if(!VerificarSeExisteCadastradoEstoque(request.LivroId))
             {
-                return Result.Failure($"Não existe este livro cadastrado no estoque");
+                return Result.Failure($"Temos este livro cadastrado, mas em registro no estoque não existe.");
             }
 
                 if (!VerificarDisponbilidade(request.LivroId))
@@ -119,7 +119,27 @@ namespace Biblioteca.Services.Applications
             return Result.OK();
         }
 
+        public async Task<Result> ValidateUpdateAsync(BookRentalRequest request)
+        {
 
-
+            if (!VerificarExistenciaCliente(request.ClienteId))
+            {
+                return Result.Failure("Este cliente não existe");
+            }
+            if (!VerificarExistenciaLivro(request.LivroId))
+            {
+                return Result.Failure("Este livro não existe");
+            }
+            var unicBook = await _bookRentalRepository.GetRental(request.ClienteId);
+            if (unicBook != null)
+            {
+                unicBook.DataEstimadaVolta = request.DataEstimadaVolta;
+                unicBook.DataSaida = request.DataSaida;
+                unicBook.ValorAluguel = request.ValorAluguel;
+                await _bookRentalRepository.UpdateRentalAsync(unicBook);
+                return Result.OK();
+            }
+            return Result.Failure("Aluguel não encontrado");
+        }
     }
 }

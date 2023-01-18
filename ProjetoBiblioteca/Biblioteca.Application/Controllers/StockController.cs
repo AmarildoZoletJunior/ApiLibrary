@@ -5,6 +5,7 @@ using Biblioteca.Domain.Entities;
 using Biblioteca.Domain.Pagination;
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infra.Data.Repository;
+using Biblioteca.Services.RepositoryApplication;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -16,10 +17,12 @@ namespace Biblioteca.Application.Controllers
     {
         private readonly IStockRepository _stockRepository;
         public IMapper Mapper;
-        public StockController(IStockRepository stockRepository,IMapper map)
+        private readonly IStockApplication _StockApplication;
+        public StockController(IStockRepository stockRepository, IStockApplication app, IMapper map)
         {
             Mapper = map;
           _stockRepository = stockRepository;
+            _StockApplication = app;
         }
 
         [HttpGet]
@@ -50,30 +53,23 @@ namespace Biblioteca.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> AddInStock(StockRequest request)
         {
-            var pesquisar = await _stockRepository.GetStock(request.ISBN);
-            if (pesquisar != null)
+            var adicionar = await _StockApplication.ValidateAddAsync(request);
+            if (adicionar.Ok)
             {
-                await UpdateStock(request);
-                return Ok("Livro ja cadastrado, Foram atualiazadas as quantidades");
+                return Ok(adicionar.Message);
             }
-            var bookPesquisa = await _stockRepository.GetBookForAdd(request.ISBN);
-            var novo = new Stock { IdLivro = bookPesquisa.Id, QuantidadeDisponivel = request.QuantidadeDisponivel, QuantidadeTotal = request.QuantidadeTotal };
-            _stockRepository.AddBookStock(novo);
-            return Ok(novo);
+            return BadRequest(adicionar.ErrorMensagem);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateStock(StockRequest request)
         {
-            var stock = await _stockRepository.GetStock(request.ISBN);
-            if (stock != null)
+            var atualizar = await _StockApplication.ValidateUpdateAsync(request);
+            if (atualizar.Ok)
             {
-                stock.QuantidadeTotal = request.QuantidadeTotal;
-                stock.QuantidadeDisponivel = request.QuantidadeTotal;
-                await _stockRepository.UpdateStockQuantity(stock);
-                return Ok(stock);
+                return Ok(atualizar.Message);
             }
-            return BadRequest();
+            return BadRequest(atualizar.ErrorMensagem);
         }
 
 

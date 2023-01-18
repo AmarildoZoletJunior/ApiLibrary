@@ -83,7 +83,7 @@ namespace Biblioteca.Application.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateBook([Required][FromBody]BookRequest book)
         {
-            var add = await _IBookApplication.ValidateAddAsync(book);
+            var add = await _IBookApplication.AtualizarBook(book);
             if (add.Ok)
             {
                 return Ok(book);

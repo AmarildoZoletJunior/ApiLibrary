@@ -67,13 +67,15 @@ namespace Biblioteca.Application.Controllers
         
         public IActionResult AddCategory([Required][FromBody]CategoryRequest category)
         {
-            Category cat = new Category { TipoCategoria = category.TipoCategoria};
+
             if (category != null)
             {
-                _categoryRepository.AddCategory(cat);
+                var mapeamento = Mapper.Map<Category>(category);
+                mapeamento.TipoCategoria = category.TipoCategoria;
+                _categoryRepository.AddCategory(mapeamento);
                 return Ok(category);
             }
-            return BadRequest();
+            return BadRequest("A categoria esta nula.");
         }
 
         [HttpPut]
@@ -84,7 +86,7 @@ namespace Biblioteca.Application.Controllers
             if (cat != null)
             {
                 cat.TipoCategoria = category.TipoCategoria;
-                _categoryRepository.UpdateCategory(cat);
+               await _categoryRepository.UpdateCategory(cat);
                 return Ok(category);
             }
             return BadRequest();

@@ -11,7 +11,7 @@ namespace Biblioteca.Services.RepositoryApplication
 {
     public interface IClientApplication
     {
-        public Result ValidateCpfAdd(ClientRequest request);
+        public Task<Result> ValidateCpfAddAsync(ClientRequest request);
         public bool VerificarCPF(string cpf);
         public Task<Result> UpdateClientAsync(ClientRequest request);
     }
