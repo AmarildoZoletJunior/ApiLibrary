@@ -24,18 +24,11 @@ namespace Biblioteca.Infra.Data.Repository
             _context.BooksRents.Add(book);
             var livroAlugar = await _context.Estoque.Include(x => x.Livro).FirstOrDefaultAsync(x => x.Livro.Id == book.LivroId);
             livroAlugar.QuantidadeDisponivel += -1;
+            var AdicionarCliente = await _context.Clients.FirstOrDefaultAsync(x => x.Id == book.ClienteId);
+            AdicionarCliente.SaldoDevedor += book.ValorAluguel;
             _context.SaveChanges();
         }
 
-        public bool ClientExists(int id)
-        {
-            var ClientExist = _context.Clients.FirstOrDefault(x => x.Id == id);
-            if(ClientExist == null)
-            {
-                return false;
-            }
-            return true;
-        }
 
         public async Task DeleteRentalAsync(int id)
         {
@@ -68,15 +61,6 @@ namespace Biblioteca.Infra.Data.Repository
         {
             _context.BooksRents.Update(book);
             await _context.SaveChangesAsync();
-        }
-        public bool BookExists(int id)
-        {
-            var book = _context.Books.FirstOrDefault(x => x.Id == id);
-            if(book != null)
-            {
-                return true;
-            }
-            return false;
         }
         public decimal ExistValueClient(int id)
         {
